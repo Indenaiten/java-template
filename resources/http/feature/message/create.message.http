@@ -1,0 +1,7 @@
+POST {{host}}:{{port}}/message
+Content-Type: application/json
+
+{
+  "text": "Hi World !"
+}
+

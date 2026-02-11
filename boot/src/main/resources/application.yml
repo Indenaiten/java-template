@@ -1,0 +1,32 @@
+# ===================================================================
+# Global Variables
+# ===================================================================
+# Sintaxis: &nombre_variable define la variable
+#           *nombre_variable la reutiliza
+# ===================================================================
+x-variables:
+  app-name: &app-name rest-server
+
+# ===================================================================
+# Configuración de Logging
+# ===================================================================
+logging:
+  level:
+    com.codenaiten.template.server: INFO
+
+
+# ===================================================================
+# Configuración de Spring
+# ===================================================================
+spring:
+  application:
+    name: *app-name
+
+  config:
+    import:
+      - optional:classpath:app/application.yml
+      - optional:classpath:infra/application.yml
+
+
+
+# ===================================================================

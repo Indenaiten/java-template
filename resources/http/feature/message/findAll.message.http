@@ -1,0 +1,3 @@
+### HTTP
+GET {{host}}:{{port}}/message/all
+
