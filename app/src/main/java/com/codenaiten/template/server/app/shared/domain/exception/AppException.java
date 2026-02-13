@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.app.shared.exception;
+package com.codenaiten.template.server.app.shared.domain.exception;
 
 public class AppException extends RuntimeException {
 

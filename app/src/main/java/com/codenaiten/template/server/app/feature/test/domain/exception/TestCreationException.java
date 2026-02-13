@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.app.feature.test.exception;
+package com.codenaiten.template.server.app.feature.test.domain.exception;
 
 public class TestCreationException extends RuntimeException {
 

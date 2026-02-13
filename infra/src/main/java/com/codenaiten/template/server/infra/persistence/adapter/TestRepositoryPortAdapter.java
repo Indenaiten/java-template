@@ -1,7 +1,7 @@
 package com.codenaiten.template.server.infra.persistence.adapter;
 
-import com.codenaiten.template.server.app.feature.test.Test;
-import com.codenaiten.template.server.app.feature.test.spi.TestRepository;
+import com.codenaiten.template.server.app.feature.test.domain.Test;
+import com.codenaiten.template.server.app.feature.test.domain.spi.TestRepository;
 import com.codenaiten.template.server.infra.persistence.mapper.TestJpaMapper;
 import com.codenaiten.template.server.infra.persistence.repository.TestJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class TestRepositoryAdapter implements TestRepository {
+public class TestRepositoryPortAdapter implements TestRepository {
 
     private final TestJpaRepository testRepository;
     private final TestJpaMapper testMapper;

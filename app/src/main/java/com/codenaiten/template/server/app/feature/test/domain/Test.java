@@ -1,7 +1,7 @@
-package com.codenaiten.template.server.app.feature.test;
+package com.codenaiten.template.server.app.feature.test.domain;
 
-import com.codenaiten.template.server.app.shared.entity.BaseEntity;
-import com.codenaiten.template.server.app.shared.entity.Entity;
+import com.codenaiten.template.server.app.shared.domain.entity.BaseEntity;
+import com.codenaiten.template.server.app.shared.domain.entity.Entity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

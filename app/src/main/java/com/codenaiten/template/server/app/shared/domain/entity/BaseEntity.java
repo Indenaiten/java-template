@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.app.shared.entity;
+package com.codenaiten.template.server.app.shared.domain.entity;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

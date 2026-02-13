@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.app.feature.test.api;
+package com.codenaiten.template.server.app.feature.test.application.api;
 
 public interface CreateTestUseCase {
 

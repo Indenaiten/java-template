@@ -1,6 +1,6 @@
 package com.codenaiten.template.server.infra.persistence.mapper;
 
-import com.codenaiten.template.server.app.feature.test.Test;
+import com.codenaiten.template.server.app.feature.test.domain.Test;
 import com.codenaiten.template.server.infra.persistence.entity.TestJpaEntity;
 import org.mapstruct.Mapper;
 

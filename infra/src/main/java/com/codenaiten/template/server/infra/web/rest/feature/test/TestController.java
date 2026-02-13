@@ -1,9 +1,9 @@
 package com.codenaiten.template.server.infra.web.rest.feature.test;
 
-import com.codenaiten.template.server.app.feature.test.api.CreateTestUseCase;
-import com.codenaiten.template.server.app.feature.test.api.FindTestByIdUseCase;
-import com.codenaiten.template.server.app.feature.test.api.GetAllTestUseCase;
-import com.codenaiten.template.server.app.feature.test.dto.TestInfo;
+import com.codenaiten.template.server.app.feature.test.application.api.CreateTestUseCase;
+import com.codenaiten.template.server.app.feature.test.application.api.FindTestByIdUseCase;
+import com.codenaiten.template.server.app.feature.test.application.api.GetAllTestUseCase;
+import com.codenaiten.template.server.app.feature.test.application.dto.TestInfo;
 import com.codenaiten.template.server.infra.web.rest.feature.test.api.TestApi;
 import com.codenaiten.template.server.infra.web.rest.feature.test.dto.input.CreateTestInput;
 import com.codenaiten.template.server.infra.web.rest.feature.test.dto.output.TestInfoOutput;

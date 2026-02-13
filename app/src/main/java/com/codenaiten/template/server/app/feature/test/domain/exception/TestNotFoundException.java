@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.app.feature.test.exception;
+package com.codenaiten.template.server.app.feature.test.domain.exception;
 
 import lombok.Getter;
 

@@ -1,7 +1,7 @@
 package com.codenaiten.template.server.infra.web.rest.shared.controller;
 
-import com.codenaiten.template.server.app.feature.test.exception.TestNotFoundException;
-import com.codenaiten.template.server.app.shared.exception.AppException;
+import com.codenaiten.template.server.app.feature.test.domain.exception.TestNotFoundException;
+import com.codenaiten.template.server.app.shared.domain.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

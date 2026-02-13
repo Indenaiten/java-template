@@ -1,6 +1,6 @@
-package com.codenaiten.template.server.app.feature.test.spi;
+package com.codenaiten.template.server.app.feature.test.domain.spi;
 
-import com.codenaiten.template.server.app.feature.test.Test;
+import com.codenaiten.template.server.app.feature.test.domain.Test;
 
 import java.util.List;
 import java.util.Optional;

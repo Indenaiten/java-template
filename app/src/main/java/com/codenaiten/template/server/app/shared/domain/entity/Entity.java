@@ -1,7 +1,6 @@
-package com.codenaiten.template.server.app.shared.entity;
+package com.codenaiten.template.server.app.shared.domain.entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 public interface Entity<T extends Serializable> extends Serializable{
 
