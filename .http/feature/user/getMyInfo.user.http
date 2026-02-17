@@ -1,0 +1,3 @@
+### Get My Info (Private)
+GET {{host}}:{{port}}/user/me
+

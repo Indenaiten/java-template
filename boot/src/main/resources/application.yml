@@ -1,0 +1,30 @@
+# ===================================================================
+# Variables
+# ===================================================================
+# Sintaxis: &nombre_variable define a new variable
+#           *nombre_variable use the variable
+# ===================================================================
+x-variables:
+  app-name: &app-name rest-server
+
+# ===================================================================
+# Logger Configuration
+# ===================================================================
+logging:
+  level:
+    com.codenaiten.template.server: INFO
+
+# ===================================================================
+# Spring Configuration
+# ===================================================================
+spring:
+  application:
+    name: *app-name
+
+  config:
+    import:
+      - optional:classpath:app/application.yml
+      - optional:classpath:infra/application.yml
+      - optional:classpath:web/application.yml
+
+# ===================================================================
