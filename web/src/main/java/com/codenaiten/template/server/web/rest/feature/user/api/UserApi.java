@@ -2,9 +2,9 @@ package com.codenaiten.template.server.web.rest.feature.user.api;
 
 import com.codenaiten.template.server.web.rest.feature.user.request.CreateUserRequest;
 import com.codenaiten.template.server.web.rest.feature.user.request.UpdateUserRequest;
-import com.codenaiten.template.server.web.rest.shared.response.PageResponse;
 import com.codenaiten.template.server.web.rest.feature.user.response.UserPrivateInfoResponse;
 import com.codenaiten.template.server.web.rest.feature.user.response.UserPublicInfoResponse;
+import com.codenaiten.template.server.web.rest.shared.response.PageResponse;
 import com.codenaiten.template.server.web.rest.shared.response.RestResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

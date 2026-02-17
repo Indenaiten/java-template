@@ -1,10 +1,6 @@
 package com.codenaiten.template.server.web.rest.feature.user;
 
-import com.codenaiten.template.server.core.feature.user.api.GetMyInfoUseCase;
-import com.codenaiten.template.server.core.feature.user.api.GetUserPublicInfoUseCase;
-import com.codenaiten.template.server.core.feature.user.api.RegisterUserUseCase;
-import com.codenaiten.template.server.core.feature.user.api.SearchUserInfoUseCase;
-import com.codenaiten.template.server.core.feature.user.api.UpdateUserUseCase;
+import com.codenaiten.template.server.core.feature.user.api.*;
 import com.codenaiten.template.server.core.feature.user.command.RegisterUserCommand;
 import com.codenaiten.template.server.core.feature.user.command.UpdateUserCommand;
 import com.codenaiten.template.server.core.feature.user.dto.UserPrivateInfo;
@@ -14,9 +10,9 @@ import com.codenaiten.template.server.core.shared.dto.Page;
 import com.codenaiten.template.server.web.rest.feature.user.api.UserApi;
 import com.codenaiten.template.server.web.rest.feature.user.request.CreateUserRequest;
 import com.codenaiten.template.server.web.rest.feature.user.request.UpdateUserRequest;
-import com.codenaiten.template.server.web.rest.shared.response.PageResponse;
 import com.codenaiten.template.server.web.rest.feature.user.response.UserPrivateInfoResponse;
 import com.codenaiten.template.server.web.rest.feature.user.response.UserPublicInfoResponse;
+import com.codenaiten.template.server.web.rest.shared.response.PageResponse;
 import com.codenaiten.template.server.web.rest.shared.response.RestResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
