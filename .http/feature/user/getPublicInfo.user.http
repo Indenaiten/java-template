@@ -1,0 +1,3 @@
+### Get User Public Info
+GET {{host}}:{{port}}/user/public/84a5122c-1646-4ff4-83d0-cb618418c34f
+
