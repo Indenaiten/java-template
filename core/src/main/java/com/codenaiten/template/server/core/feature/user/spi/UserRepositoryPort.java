@@ -1,7 +1,7 @@
 package com.codenaiten.template.server.core.feature.user.spi;
 
 import com.codenaiten.template.server.core.feature.user.User;
-import com.codenaiten.template.server.core.shared.dto.Page;
+import com.codenaiten.template.server.core.shared.dto.PageInfo;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -13,5 +13,5 @@ public interface UserRepositoryPort {
     Optional<User> findById( UUID id );
     boolean existsByEmail( String email );
     boolean existsByUsername( String username );
-    Page<User> search( String search, int page, int size );
+    PageInfo<User> search(String search, int page, int size );
 }

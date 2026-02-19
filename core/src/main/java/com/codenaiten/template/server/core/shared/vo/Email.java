@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.core.shared.entity.vo;
+package com.codenaiten.template.server.core.shared.vo;
 
 import java.util.Objects;
 import java.util.Optional;

@@ -6,7 +6,7 @@ import com.codenaiten.template.server.core.feature.user.command.UpdateUserComman
 import com.codenaiten.template.server.core.feature.user.dto.UserPrivateInfo;
 import com.codenaiten.template.server.core.feature.user.dto.UserPublicInfo;
 import com.codenaiten.template.server.core.shared.command.PageCommand;
-import com.codenaiten.template.server.core.shared.dto.Page;
+import com.codenaiten.template.server.core.shared.dto.PageInfo;
 import com.codenaiten.template.server.web.rest.feature.user.api.UserApi;
 import com.codenaiten.template.server.web.rest.feature.user.request.CreateUserRequest;
 import com.codenaiten.template.server.web.rest.feature.user.request.UpdateUserRequest;
@@ -70,7 +70,7 @@ public class UserController implements UserApi {
     @Override
     public ResponseEntity<RestResponse<PageResponse<UserPublicInfoResponse>>> search( final String search, final Integer page, final Integer size ) {
         final PageCommand pageCommand = new PageCommand( page, size );
-        final Page<UserPublicInfo> result = this.searchUserInfoUseCase.run( search, pageCommand );
+        final PageInfo<UserPublicInfo> result = this.searchUserInfoUseCase.run( search, pageCommand );
         final PageResponse<UserPublicInfoResponse> data = this.userMapper.toPageResponseWithMapping( result );
         final var response = RestResponse.success().build( data );
         return ResponseEntity.ok( response );

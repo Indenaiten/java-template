@@ -6,7 +6,7 @@ import com.codenaiten.template.server.core.feature.user.api.SearchUserInfoUseCas
 import com.codenaiten.template.server.core.feature.user.dto.UserPublicInfo;
 import com.codenaiten.template.server.core.feature.user.spi.UserRepositoryPort;
 import com.codenaiten.template.server.core.shared.command.PageCommand;
-import com.codenaiten.template.server.core.shared.dto.Page;
+import com.codenaiten.template.server.core.shared.dto.PageInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,9 +20,9 @@ public class SearchUserHandler implements SearchUserInfoUseCase {
     private final UserMapper userMapper;
 
     @Override
-    public Page<UserPublicInfo> run( final String search, final PageCommand pageCommand ) {
+    public PageInfo<UserPublicInfo> run(final String search, final PageCommand pageCommand ) {
         // Step 01: Search Users
-        final Page<User> page = this.userRepositoryPort.search( search, pageCommand.getPage(), pageCommand.getSize() );
+        final PageInfo<User> page = this.userRepositoryPort.search( search, pageCommand.getPage(), pageCommand.getSize() );
 
         // Step 02: Return User Public Info PAge
         return this.userMapper.toPublicInfo( page );

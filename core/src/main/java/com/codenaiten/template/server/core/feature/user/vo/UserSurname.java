@@ -1,6 +1,6 @@
 package com.codenaiten.template.server.core.feature.user.vo;
 
-import com.codenaiten.template.server.core.shared.entity.vo.ValueObject;
+import com.codenaiten.template.server.core.shared.vo.ValueObject;
 
 import java.util.Objects;
 import java.util.Optional;

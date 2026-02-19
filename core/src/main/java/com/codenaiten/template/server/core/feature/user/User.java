@@ -4,7 +4,7 @@ import com.codenaiten.template.server.core.feature.user.vo.UserName;
 import com.codenaiten.template.server.core.feature.user.vo.UserSurname;
 import com.codenaiten.template.server.core.feature.user.vo.UserUsername;
 import com.codenaiten.template.server.core.shared.entity.Entity;
-import com.codenaiten.template.server.core.shared.entity.vo.Email;
+import com.codenaiten.template.server.core.shared.vo.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

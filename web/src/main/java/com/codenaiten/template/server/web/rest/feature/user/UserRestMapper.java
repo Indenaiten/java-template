@@ -4,7 +4,7 @@ import com.codenaiten.template.server.core.feature.user.command.RegisterUserComm
 import com.codenaiten.template.server.core.feature.user.command.UpdateUserCommand;
 import com.codenaiten.template.server.core.feature.user.dto.UserPrivateInfo;
 import com.codenaiten.template.server.core.feature.user.dto.UserPublicInfo;
-import com.codenaiten.template.server.core.shared.dto.Page;
+import com.codenaiten.template.server.core.shared.dto.PageInfo;
 import com.codenaiten.template.server.web.rest.feature.user.request.CreateUserRequest;
 import com.codenaiten.template.server.web.rest.feature.user.request.UpdateUserRequest;
 import com.codenaiten.template.server.web.rest.feature.user.response.UserPrivateInfoResponse;
@@ -26,7 +26,7 @@ public interface UserRestMapper {
     RegisterUserCommand toCommand( CreateUserRequest src );
     UpdateUserCommand toCommand( UpdateUserRequest src );
 
-    default PageResponse<UserPublicInfoResponse> toPageResponseWithMapping( Page<UserPublicInfo> src ) {
+    default PageResponse<UserPublicInfoResponse> toPageResponseWithMapping( PageInfo<UserPublicInfo> src ) {
         if( Objects.isNull( src )) return null;
 
         return new PageResponse<>(

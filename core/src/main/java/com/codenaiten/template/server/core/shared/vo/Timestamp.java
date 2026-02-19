@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.core.shared.entity.vo;
+package com.codenaiten.template.server.core.shared.vo;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

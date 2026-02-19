@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.core.shared.filter;
+package com.codenaiten.template.server.core.shared.vo;
 
 import java.util.ArrayList;
 import java.util.Collection;

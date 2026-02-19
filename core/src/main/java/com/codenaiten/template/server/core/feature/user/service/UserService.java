@@ -17,7 +17,7 @@ import com.codenaiten.template.server.core.feature.user.vo.UserName;
 import com.codenaiten.template.server.core.feature.user.vo.UserPassword;
 import com.codenaiten.template.server.core.feature.user.vo.UserSurname;
 import com.codenaiten.template.server.core.feature.user.vo.UserUsername;
-import com.codenaiten.template.server.core.shared.entity.vo.Email;
+import com.codenaiten.template.server.core.shared.vo.Email;
 import com.codenaiten.template.server.core.shared.spi.PasswordCrypterPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
