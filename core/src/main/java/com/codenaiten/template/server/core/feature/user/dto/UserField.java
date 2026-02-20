@@ -12,7 +12,6 @@ import java.util.UUID;
 
 @Slf4j
 @Getter
-@Accessors( fluent = true )
 @RequiredArgsConstructor
 public enum UserField implements FilterQuery.Field{
     ID( "id", UUID.class ),

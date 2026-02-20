@@ -66,7 +66,7 @@ public final class FilterQuerySpecificationConverter {
             final Root<E> root,
             final CriteriaBuilder cb
     ) {
-        final String fieldName = condition.getField().name();
+        final String fieldName = condition.getField().getName();
         final Object value = condition.getValue();
 
         return switch ( condition.getOperator() ) {

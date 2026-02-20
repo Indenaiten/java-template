@@ -58,7 +58,7 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     @Override
     public PageInfo<User> search( final FilterQuery<UserField> filterQuery, final PageQuery pageQuery ){
         final Specification<UserJpaEntity> specification = FilterQuerySpecificationConverter.convert( filterQuery );
-        final Sort sort = Sort.by( Sort.Direction.ASC, UserField.CREATED_AT.name() );
+        final Sort sort = Sort.by( Sort.Direction.ASC, UserField.CREATED_AT.getName() );
         final Pageable pageable = PageRequest.of( pageQuery.page(), pageQuery.size(), sort );
         final org.springframework.data.domain.Page<UserJpaEntity> result = this.userRepository.findAll( specification, pageable );
         final List<User> content = result.getContent().stream().map( this.userMapper::toEntity ).toList();
