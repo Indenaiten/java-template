@@ -1,7 +1,6 @@
 package com.codenaiten.template.server.infra.persistence.converter;
 
 import com.codenaiten.template.server.core.shared.dto.query.FilterQuery;
-import jakarta.persistence.Entity;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;

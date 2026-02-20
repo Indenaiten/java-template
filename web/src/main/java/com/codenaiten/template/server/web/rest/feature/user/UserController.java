@@ -3,10 +3,9 @@ package com.codenaiten.template.server.web.rest.feature.user;
 import com.codenaiten.template.server.core.feature.user.api.*;
 import com.codenaiten.template.server.core.feature.user.dto.command.RegisterUserCommand;
 import com.codenaiten.template.server.core.feature.user.dto.command.UpdateUserCommand;
+import com.codenaiten.template.server.core.feature.user.dto.query.SearchUserQuery;
 import com.codenaiten.template.server.core.feature.user.dto.result.UserPrivateInfo;
 import com.codenaiten.template.server.core.feature.user.dto.result.UserPublicInfo;
-import com.codenaiten.template.server.core.shared.dto.query.FilterQuery;
-import com.codenaiten.template.server.core.shared.dto.query.PageQuery;
 import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
 import com.codenaiten.template.server.web.rest.feature.user.api.UserApi;
 import com.codenaiten.template.server.web.rest.feature.user.converter.UserSearchRequestConverter;
@@ -30,6 +29,7 @@ import java.util.UUID;
 public class UserController implements UserApi {
 
     private final UserRestMapper userMapper;
+    private final UserSearchRequestConverter userSearchRequestConverter;
     private final RegisterUserUseCase registerUserUseCase;
     private final GetUserPublicInfoUseCase getUserPublicInfoUseCase;
     private final GetMyInfoUseCase getMyInfoUseCase;
@@ -72,9 +72,8 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<RestResponse<PageResponse<UserPublicInfoResponse>>> search( final UserSearchRequest request ) {
-        final FilterQuery<UserField> filterQuery = UserSearchRequestConverter.convert( request );
-        final PageQuery pageQuery = this.userSearchRequestConverter.toPageQuery( request );
-        final PageInfo<UserPublicInfo> result = this.searchUserInfoUseCase.run( filterQuery, pageQuery );
+        final SearchUserQuery query = this.userSearchRequestConverter.toQuery( request );
+        final PageInfo<UserPublicInfo> result = this.searchUserInfoUseCase.run( query );
         final PageResponse<UserPublicInfoResponse> data = this.userMapper.toResponse( result );
         final var response = RestResponse.success().build( data );
         return ResponseEntity.ok( response );

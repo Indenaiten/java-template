@@ -4,11 +4,9 @@ import com.codenaiten.template.server.core.feature.user.dto.command.RegisterUser
 import com.codenaiten.template.server.core.feature.user.dto.command.UpdateUserCommand;
 import com.codenaiten.template.server.core.feature.user.dto.result.UserPrivateInfo;
 import com.codenaiten.template.server.core.feature.user.dto.result.UserPublicInfo;
-import com.codenaiten.template.server.core.shared.dto.query.FilterQuery;
 import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
 import com.codenaiten.template.server.web.rest.feature.user.dto.request.CreateUserRequest;
 import com.codenaiten.template.server.web.rest.feature.user.dto.request.UpdateUserRequest;
-import com.codenaiten.template.server.web.rest.feature.user.dto.request.UserSearchRequest;
 import com.codenaiten.template.server.web.rest.feature.user.dto.response.UserPrivateInfoResponse;
 import com.codenaiten.template.server.web.rest.feature.user.dto.response.UserPublicInfoResponse;
 import com.codenaiten.template.server.web.rest.shared.mapper.RestMapper;
@@ -25,7 +23,6 @@ public interface UserRestMapper {
     RegisterUserCommand toCommand( CreateUserRequest src );
     UpdateUserCommand toCommand( UpdateUserRequest src );
 
-    FilterQuery<UserField> convert( UserSearchRequest src );
 
     UserPrivateInfoResponse toResponse( UserPrivateInfo src );
     UserPublicInfoResponse toResponse( UserPublicInfo src );

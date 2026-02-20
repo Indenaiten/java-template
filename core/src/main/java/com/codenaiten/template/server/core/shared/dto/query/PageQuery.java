@@ -8,6 +8,6 @@ public record PageQuery( Integer number, Integer size ){
         return Optional.ofNullable( this.number ).orElse( 0 );
     }
     public Integer size(){
-        return Optional.ofNullable( this.number ).orElse( 25 );
+        return Optional.ofNullable( this.size ).orElse( 25 );
     }
 }
