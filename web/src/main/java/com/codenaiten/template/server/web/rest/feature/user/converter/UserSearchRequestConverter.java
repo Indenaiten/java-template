@@ -1,15 +1,18 @@
 package com.codenaiten.template.server.web.rest.feature.user.converter;
 
+import com.codenaiten.template.server.core.feature.user.dto.UserField;
 import com.codenaiten.template.server.core.shared.dto.query.FilterQuery;
 import com.codenaiten.template.server.core.shared.dto.query.PageQuery;
 import com.codenaiten.template.server.web.rest.feature.user.dto.request.UserSearchRequest;
 import com.codenaiten.template.server.web.rest.shared.dto.converter.FilterRequestConverter;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
+@Component
 public class UserSearchRequestConverter {
 
-    public FilterQuery<UserField> toFilterQuery( final UserSearchRequest request ) {
+    public FilterQuery toFilterQuery( final UserSearchRequest request ) {
         if ( Objects.isNull( request ) ) {
             return FilterRequestConverter.convert( null, UserField.class );
         }
@@ -23,4 +26,3 @@ public class UserSearchRequestConverter {
         return new PageQuery( request.page().number(), request.page().size() );
     }
 }
-

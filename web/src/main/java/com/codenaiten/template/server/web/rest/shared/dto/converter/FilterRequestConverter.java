@@ -25,20 +25,22 @@ public final class FilterRequestConverter {
      *
      * @param filterRequest {@link FilterRequest} El filtro de la petición REST.
      * @param fieldEnum {@link Class} La clase enum del campo (ej: UserField.class).
-     * @param <T> El tipo del campo que extiende {@link FilterQuery.Field}.
      *
      * @return {@link FilterQuery} El filtro del dominio equivalente.
      */
-    public static <T extends FilterQuery.Field> FilterQuery<T> convert(
+    public static FilterQuery convert(
             final FilterRequest filterRequest,
-            final Class<T> fieldEnum
+            final Class<? extends FilterQuery.Field> fieldEnum
     ) {
         if ( Objects.isNull( filterRequest ) ) {
-            return new FilterQuery<>( Collections.emptyList() );
+            return new FilterQuery( Collections.emptyList() );
+        }
+        if ( Objects.isNull( fieldEnum ) || !fieldEnum.isEnum() ) {
+            throw new IllegalArgumentException( "fieldEnum debe ser un Enum que implemente FilterQuery.Field" );
         }
 
         final LogicalOperator logicalOperator = resolveLogicalOperator( filterRequest.logical() );
-        final List<Condition<T>> conditions = new ArrayList<>();
+        final List<Condition> conditions = new ArrayList<>();
 
         if ( Objects.nonNull( filterRequest.conditions() ) ) {
             for ( final FilterRequest.Condition conditionRequest : filterRequest.conditions() ) {
@@ -47,11 +49,11 @@ public final class FilterRequestConverter {
         }
 
         if ( conditions.isEmpty() ) {
-            return new FilterQuery<>( Collections.emptyList() );
+            return new FilterQuery( Collections.emptyList() );
         }
 
-        final FilterQuery.Group<T> group = new FilterQuery.Group<>( logicalOperator, conditions );
-        return new FilterQuery<>( List.of( group ) );
+        final FilterQuery.Group group = new FilterQuery.Group( logicalOperator, conditions );
+        return new FilterQuery( List.of( group ) );
     }
 
     /**
@@ -59,19 +61,18 @@ public final class FilterRequestConverter {
      *
      * @param request {@link FilterRequest.Condition} La condición de la petición REST.
      * @param fieldEnum {@link Class} La clase enum del campo.
-     * @param <T> El tipo del campo que extiende {@link FilterQuery.Field}.
      *
      * @return {@link Condition} La condición del dominio equivalente.
      */
-    private static <T extends FilterQuery.Field> Condition<T> toCondition(
+    private static Condition toCondition(
             final FilterRequest.Condition request,
-            final Class<T> fieldEnum
+            final Class<? extends FilterQuery.Field> fieldEnum
     ) {
-        final T field = resolveField( request.field(), fieldEnum );
+        final FilterQuery.Field field = resolveField( request.field(), fieldEnum );
         final Operator operator = Operator.valueOf( request.operator().toUpperCase() );
         final Object value = convertValue( field, operator, request );
 
-        return new Condition<>( field, operator, value );
+        return new Condition( field, operator, value );
     }
 
     /**
@@ -144,19 +145,20 @@ public final class FilterRequestConverter {
      *
      * @param fieldName {@link String} El nombre del campo.
      * @param fieldEnum {@link Class} La clase enum del campo.
-     * @param <T> El tipo del campo que extiende {@link FilterQuery.Field}.
      *
      * @return {@link T} El campo enum correspondiente.
      *
      * @throws IllegalArgumentException Si el campo no existe en el enum.
      */
-    private static <T extends FilterQuery.Field> T resolveField( final String fieldName, final Class<T> fieldEnum ) {
+    private static FilterQuery.Field resolveField(
+            final String fieldName,
+            final Class<? extends FilterQuery.Field> fieldEnum
+    ) {
         if ( Objects.isNull( fieldName ) ) {
             throw new IllegalArgumentException( "El nombre del campo no puede ser nulo" );
         }
 
-        // Iteramos sobre los valores del enum para encontrar el campo
-        for ( T field : fieldEnum.getEnumConstants() ) {
+        for ( final FilterQuery.Field field : fieldEnum.getEnumConstants() ) {
             if ( ((Enum<?>) field).name().equalsIgnoreCase( fieldName ) ) {
                 return field;
             }
@@ -179,4 +181,3 @@ public final class FilterRequestConverter {
         return LogicalOperator.valueOf( value.toUpperCase() );
     }
 }
-
