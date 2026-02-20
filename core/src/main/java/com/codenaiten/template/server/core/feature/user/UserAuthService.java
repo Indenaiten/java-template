@@ -1,6 +1,6 @@
-package com.codenaiten.template.server.core.feature.user.service;
+package com.codenaiten.template.server.core.feature.user;
 
-import com.codenaiten.template.server.core.feature.user.User;
+import com.codenaiten.template.server.core.feature.user.model.User;
 import com.codenaiten.template.server.core.feature.user.exception.UserAuthenticationNotFoundException;
 import com.codenaiten.template.server.core.feature.user.exception.UserNotFoundException;
 import com.codenaiten.template.server.core.feature.user.spi.UserAuthProviderPort;

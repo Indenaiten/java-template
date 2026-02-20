@@ -1,12 +1,11 @@
 package com.codenaiten.template.server.web.rest.feature.user;
 
 import com.codenaiten.template.server.core.feature.user.api.*;
-import com.codenaiten.template.server.core.feature.user.command.RegisterUserCommand;
-import com.codenaiten.template.server.core.feature.user.command.UpdateUserCommand;
-import com.codenaiten.template.server.core.feature.user.dto.UserPrivateInfo;
-import com.codenaiten.template.server.core.feature.user.dto.UserPublicInfo;
-import com.codenaiten.template.server.core.shared.command.PageCommand;
-import com.codenaiten.template.server.core.shared.dto.PageInfo;
+import com.codenaiten.template.server.core.feature.user.dto.command.RegisterUserCommand;
+import com.codenaiten.template.server.core.feature.user.dto.command.UpdateUserCommand;
+import com.codenaiten.template.server.core.feature.user.dto.result.UserPrivateInfo;
+import com.codenaiten.template.server.core.feature.user.dto.result.UserPublicInfo;
+import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
 import com.codenaiten.template.server.web.rest.feature.user.api.UserApi;
 import com.codenaiten.template.server.web.rest.feature.user.request.CreateUserRequest;
 import com.codenaiten.template.server.web.rest.feature.user.request.UpdateUserRequest;

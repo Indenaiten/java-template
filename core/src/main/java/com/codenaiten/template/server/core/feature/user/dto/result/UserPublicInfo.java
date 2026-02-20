@@ -1,5 +1,5 @@
 
-package com.codenaiten.template.server.core.feature.user.dto;
+package com.codenaiten.template.server.core.feature.user.dto.result;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

@@ -1,26 +1,19 @@
-package com.codenaiten.template.server.core.shared.vo;
+package com.codenaiten.template.server.core.shared.dto.query;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import lombok.Getter;
+
 import java.time.temporal.Temporal;
+import java.util.*;
 
-public class Filter {
+public class FilterQuery<T extends FilterQuery.Field>{
 
-    private final List<FilterGroup> groups;
+    private List<Group<T>> groups;
 
 // ------------------------------------------------------------------------------------------------------------------ \\
 // ---| CONSTRUCTOR |------------------------------------------------------------------------------------------------ \\
 // ------------------------------------------------------------------------------------------------------------------ \\
 
-    private Filter() {
-        this.groups = new ArrayList<>();
-    }
-
-    private Filter( final List<FilterGroup> groups ) {
+    public FilterQuery( final List<Group<T>> groups ) {
         this.groups = new ArrayList<>( groups );
     }
 
@@ -34,11 +27,11 @@ public class Filter {
      * @param field {@link Field} El campo a filtrar.
      * @param value {@link Object} El valor a comparar.
      *
-     * @return {@link FilterCondition} La condición de filtro.
+     * @return {@link Condition} La condición de filtro.
      */
-    public static FilterCondition equals( final Field field, final Object value ) {
+    public static <T extends FilterQuery.Field> Condition<T> equals( final T field, final Object value ) {
         validateValueType( field, value );
-        return new FilterCondition( field, FilterOperator.EQUALS, value );
+        return new Condition<>( field, Operator.EQUALS, value );
     }
 
     /**
@@ -47,11 +40,11 @@ public class Filter {
      * @param field {@link Field} El campo a filtrar.
      * @param value {@link Object} El valor a comparar.
      *
-     * @return {@link FilterCondition} La condición de filtro.
+     * @return {@link Condition} La condición de filtro.
      */
-    public static FilterCondition notEquals( final Field field, final Object value ) {
+    public static <T extends FilterQuery.Field> Condition<T> notEquals( final T field, final Object value ) {
         validateValueType( field, value );
-        return new FilterCondition( field, FilterOperator.NOT_EQUALS, value );
+        return new Condition<>( field, Operator.NOT_EQUALS, value );
     }
 
     /**
@@ -60,12 +53,12 @@ public class Filter {
      * @param field {@link Field} El campo a filtrar.
      * @param value {@link Object} El valor a comparar.
      *
-     * @return {@link FilterCondition} La condición de filtro.
+     * @return {@link Condition} La condición de filtro.
      */
-    public static FilterCondition greaterThan( final Field field, final Object value ) {
+    public static <T extends FilterQuery.Field> Condition<T> greaterThan( final T field, final Object value ) {
         validateComparable( field );
         validateValueType( field, value );
-        return new FilterCondition( field, FilterOperator.GREATER_THAN, value );
+        return new Condition<>( field, Operator.GREATER_THAN, value );
     }
 
     /**
@@ -74,12 +67,12 @@ public class Filter {
      * @param field {@link Field} El campo a filtrar.
      * @param value {@link Object} El valor a comparar.
      *
-     * @return {@link FilterCondition} La condición de filtro.
+     * @return {@link Condition} La condición de filtro.
      */
-    public static FilterCondition greaterThanOrEquals( final Field field, final Object value ) {
+    public static <T extends FilterQuery.Field> Condition<T> greaterThanOrEquals( final T field, final Object value ) {
         validateComparable( field );
         validateValueType( field, value );
-        return new FilterCondition( field, FilterOperator.GREATER_THAN_OR_EQUALS, value );
+        return new Condition<>( field, Operator.GREATER_THAN_OR_EQUALS, value );
     }
 
     /**
@@ -88,12 +81,12 @@ public class Filter {
      * @param field {@link Field} El campo a filtrar.
      * @param value {@link Object} El valor a comparar.
      *
-     * @return {@link FilterCondition} La condición de filtro.
+     * @return {@link Condition} La condición de filtro.
      */
-    public static FilterCondition lessThan( final Field field, final Object value ) {
+    public static <T extends FilterQuery.Field> Condition<T> lessThan( final T field, final Object value ) {
         validateComparable( field );
         validateValueType( field, value );
-        return new FilterCondition( field, FilterOperator.LESS_THAN, value );
+        return new Condition<>( field, Operator.LESS_THAN, value );
     }
 
     /**
@@ -102,12 +95,12 @@ public class Filter {
      * @param field {@link Field} El campo a filtrar.
      * @param value {@link Object} El valor a comparar.
      *
-     * @return {@link FilterCondition} La condición de filtro.
+     * @return {@link Condition} La condición de filtro.
      */
-    public static FilterCondition lessThanOrEquals( final Field field, final Object value ) {
+    public static <T extends FilterQuery.Field> Condition<T> lessThanOrEquals( final T field, final Object value ) {
         validateComparable( field );
         validateValueType( field, value );
-        return new FilterCondition( field, FilterOperator.LESS_THAN_OR_EQUALS, value );
+        return new Condition<>( field, Operator.LESS_THAN_OR_EQUALS, value );
     }
 
     /**
@@ -116,11 +109,11 @@ public class Filter {
      * @param field {@link Field} El campo a filtrar.
      * @param value {@link String} El patrón a buscar.
      *
-     * @return {@link FilterCondition} La condición de filtro.
+     * @return {@link Condition} La condición de filtro.
      */
-    public static FilterCondition like( final Field field, final String value ) {
+    public static <T extends FilterQuery.Field> Condition<T> like( final T field, final String value ) {
         validateString( field );
-        return new FilterCondition( field, FilterOperator.LIKE, value );
+        return new Condition<>( field, Operator.LIKE, value );
     }
 
     /**
@@ -129,11 +122,11 @@ public class Filter {
      * @param field {@link Field} El campo a filtrar.
      * @param value {@link String} El patrón a buscar.
      *
-     * @return {@link FilterCondition} La condición de filtro.
+     * @return {@link Condition} La condición de filtro.
      */
-    public static FilterCondition notLike( final Field field, final String value ) {
+    public static <T extends FilterQuery.Field> Condition<T> notLike( final T field, final String value ) {
         validateString( field );
-        return new FilterCondition( field, FilterOperator.NOT_LIKE, value );
+        return new Condition<>( field, Operator.NOT_LIKE, value );
     }
 
     /**
@@ -142,11 +135,11 @@ public class Filter {
      * @param field {@link Field} El campo a filtrar.
      * @param values {@link Collection} Los valores a comparar.
      *
-     * @return {@link FilterCondition} La condición de filtro.
+     * @return {@link Condition} La condición de filtro.
      */
-    public static FilterCondition in( final Field field, final Collection<?> values ) {
+    public static <T extends FilterQuery.Field> Condition<T> in( final T field, final Collection<?> values ) {
         validateCollectionTypes( field, values );
-        return new FilterCondition( field, FilterOperator.IN, values );
+        return new Condition<>( field, Operator.IN, values );
     }
 
     /**
@@ -155,11 +148,11 @@ public class Filter {
      * @param field {@link Field} El campo a filtrar.
      * @param values {@link Collection} Los valores a comparar.
      *
-     * @return {@link FilterCondition} La condición de filtro.
+     * @return {@link Condition} La condición de filtro.
      */
-    public static FilterCondition notIn( final Field field, final Collection<?> values ) {
+    public static <T extends FilterQuery.Field> Condition<T> notIn( final T field, final Collection<?> values ) {
         validateCollectionTypes( field, values );
-        return new FilterCondition( field, FilterOperator.NOT_IN, values );
+        return new Condition<>( field, Operator.NOT_IN, values );
     }
 
     /**
@@ -169,13 +162,13 @@ public class Filter {
      * @param start {@link Object} El valor inicial del rango.
      * @param end {@link Object} El valor final del rango.
      *
-     * @return {@link FilterCondition} La condición de filtro.
+     * @return {@link Condition} La condición de filtro.
      */
-    public static FilterCondition between( final Field field, final Object start, final Object end ) {
+    public static <T extends FilterQuery.Field> Condition<T> between( final T field, final Object start, final Object end ) {
         validateComparable( field );
         validateValueType( field, start );
         validateValueType( field, end );
-        return new FilterCondition( field, FilterOperator.BETWEEN, new Object[]{ start, end } );
+        return new Condition<>( field, Operator.BETWEEN, new Object[]{ start, end } );
     }
 
     /**
@@ -183,10 +176,10 @@ public class Filter {
      *
      * @param field {@link Field} El campo a filtrar.
      *
-     * @return {@link FilterCondition} La condición de filtro.
+     * @return {@link Condition} La condición de filtro.
      */
-    public static FilterCondition isNull( final Field field ) {
-        return new FilterCondition( field, FilterOperator.IS_NULL, null );
+    public static <T extends FilterQuery.Field> Condition<T> isNull( final T field ) {
+        return new Condition<>( field, Operator.IS_NULL, null );
     }
 
     /**
@@ -194,10 +187,10 @@ public class Filter {
      *
      * @param field {@link Field} El campo a filtrar.
      *
-     * @return {@link FilterCondition} La condición de filtro.
+     * @return {@link Condition} La condición de filtro.
      */
-    public static FilterCondition isNotNull( final Field field ) {
-        return new FilterCondition( field, FilterOperator.IS_NOT_NULL, null );
+    public static <T extends FilterQuery.Field> Condition<T> isNotNull( final T field ) {
+        return new Condition<T>( field, Operator.IS_NOT_NULL, null );
     }
 
     /**
@@ -207,8 +200,8 @@ public class Filter {
      *
      * @return {@link FilterBuilder} Builder para continuar construyendo el filtro.
      */
-    public static FilterBuilder and( final List<FilterCondition> conditions ) {
-        return new FilterBuilder().and( conditions );
+    public static <T extends FilterQuery.Field> FilterBuilder<T> and( final List<Condition<T>> conditions ) {
+        return new FilterBuilder<T>().and( conditions );
     }
 
     /**
@@ -218,19 +211,19 @@ public class Filter {
      *
      * @return {@link FilterBuilder} Builder para continuar construyendo el filtro.
      */
-    public static FilterBuilder or( final List<FilterCondition> conditions ) {
-        return new FilterBuilder().or( conditions );
+    public static <T extends FilterQuery.Field> FilterBuilder<T> or( final List<Condition<T>> conditions ) {
+        return new FilterBuilder<T>().or( conditions );
     }
 
     /**
      * Crea un filtro a partir de una única condición.
      *
-     * @param condition {@link FilterCondition} La condición de filtro.
+     * @param condition {@link Condition} La condición de filtro.
      *
      * @return {@link FilterBuilder} Builder para continuar construyendo el filtro.
      */
-    public static FilterBuilder where( final FilterCondition condition ) {
-        return new FilterBuilder().and( List.of( condition ) );
+    public static <T extends FilterQuery.Field> FilterBuilder<T> where( final Condition<T> condition ) {
+        return new FilterBuilder<T>().and( List.of( condition ) );
     }
 
 // ------------------------------------------------------------------------------------------------------------------ \\
@@ -242,7 +235,7 @@ public class Filter {
      *
      * @return {@link List} Lista inmutable de grupos de filtros.
      */
-    public List<FilterGroup> getGroups() {
+    public List<Group<T>> getGroups() {
         return Collections.unmodifiableList( this.groups );
     }
 
@@ -262,7 +255,7 @@ public class Filter {
     /**
      * Enumeración de operadores de filtro disponibles.
      */
-    public enum FilterOperator {
+    public enum Operator{
         EQUALS,
         NOT_EQUALS,
         GREATER_THAN,
@@ -294,23 +287,23 @@ public class Filter {
     /**
      * Representa una condición individual de filtro.
      */
-    public static class FilterCondition {
+    public static class Condition<T extends FilterQuery.Field>{
 
-        private final Field field;
-        private final FilterOperator operator;
+        private final T field;
+        private final Operator operator;
         private final Object value;
 
-        public FilterCondition( final Field field, final FilterOperator operator, final Object value ) {
+        public Condition( final T field, final Operator operator, final Object value ) {
             this.field = Objects.requireNonNull( field, "El campo no puede ser nulo" );
             this.operator = Objects.requireNonNull( operator, "El operador no puede ser nulo" );
             this.value = value;
         }
 
-        public Field getField() {
+        public T getField() {
             return this.field;
         }
 
-        public FilterOperator getOperator() {
+        public Operator getOperator() {
             return this.operator;
         }
 
@@ -327,21 +320,18 @@ public class Filter {
     /**
      * Representa un grupo de condiciones unidas por un operador lógico.
      */
-    public static class FilterGroup {
+    @Getter
+    public static class Group<T extends FilterQuery.Field>{
 
         private final LogicalOperator logicalOperator;
-        private final List<FilterCondition> conditions;
+        private final List<Condition<T>> conditions;
 
-        public FilterGroup( final LogicalOperator logicalOperator, final List<FilterCondition> conditions ) {
+        public Group( final LogicalOperator logicalOperator, final List<Condition<T>> conditions ) {
             this.logicalOperator = Objects.requireNonNull( logicalOperator, "El operador lógico no puede ser nulo" );
             this.conditions = new ArrayList<>( Objects.requireNonNull( conditions, "Las condiciones no pueden ser nulas" ) );
         }
 
-        public LogicalOperator getLogicalOperator() {
-            return this.logicalOperator;
-        }
-
-        public List<FilterCondition> getConditions() {
+        public List<Condition<T>> getConditions() {
             return Collections.unmodifiableList( this.conditions );
         }
 
@@ -354,9 +344,9 @@ public class Filter {
     /**
      * Builder para construir filtros de forma fluida.
      */
-    public static class FilterBuilder {
+    public static class FilterBuilder<T extends FilterQuery.Field> {
 
-        private final List<FilterGroup> groups;
+        private final List<Group<T>> groups;
 
         private FilterBuilder() {
             this.groups = new ArrayList<>();
@@ -369,9 +359,9 @@ public class Filter {
          *
          * @return {@link FilterBuilder} Este builder para encadenamiento.
          */
-        public FilterBuilder and( final List<FilterCondition> conditions ) {
+        public FilterBuilder<T> and( final List<Condition<T>> conditions ) {
             if ( Objects.nonNull( conditions ) && !conditions.isEmpty() ) {
-                this.groups.add( new FilterGroup( LogicalOperator.AND, conditions ) );
+                this.groups.add( new Group<>( LogicalOperator.AND, conditions ) );
             }
             return this;
         }
@@ -383,9 +373,9 @@ public class Filter {
          *
          * @return {@link FilterBuilder} Este builder para encadenamiento.
          */
-        public FilterBuilder or( final List<FilterCondition> conditions ) {
+        public FilterBuilder<T> or( final List<Condition<T>> conditions ) {
             if ( Objects.nonNull( conditions ) && !conditions.isEmpty() ) {
-                this.groups.add( new FilterGroup( LogicalOperator.OR, conditions ) );
+                this.groups.add( new Group<>( LogicalOperator.OR, conditions ) );
             }
             return this;
         }
@@ -393,10 +383,10 @@ public class Filter {
         /**
          * Construye el filtro con todas las condiciones añadidas.
          *
-         * @return {@link Filter} El filtro construido.
+         * @return {@link FilterQuery} El filtro construido.
          */
-        public Filter build() {
-            return new Filter( this.groups );
+        public FilterQuery<T> build() {
+            return new FilterQuery<>( this.groups );
         }
     }
 

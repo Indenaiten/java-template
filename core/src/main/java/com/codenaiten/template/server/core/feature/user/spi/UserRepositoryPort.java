@@ -1,7 +1,7 @@
 package com.codenaiten.template.server.core.feature.user.spi;
 
-import com.codenaiten.template.server.core.feature.user.User;
-import com.codenaiten.template.server.core.shared.dto.PageInfo;
+import com.codenaiten.template.server.core.feature.user.model.User;
+import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
 
 import java.util.Optional;
 import java.util.UUID;

@@ -1,31 +1,29 @@
-package com.codenaiten.template.server.core.feature.user.vo;
-
-import com.codenaiten.template.server.core.shared.vo.ValueObject;
+package com.codenaiten.template.server.core.shared.model.vo;
 
 import java.util.Objects;
 import java.util.Optional;
 
-public record UserName( String value ) implements ValueObject<String>{
+public record Email( String value ) implements ValueObject<String>{
 
-    /** Longitud mínima del nombre de un usuario */
-    public static final int MIN_SIZE = 3;
+    /** Longitud mínima del correo electrónico */
+    public static final int MIN_SIZE = 6;
 
-    /** Longitud máxima del nombre de un usuario */
-    public static final int MAX_SIZE = 50;
+    /** Longitud máxima del correo electrónico */
+    public static final int MAX_SIZE = 256;
 
-    /** Expresión regular que define el formato válido de un nombre de usuario */
-    public static final String FORMAT = "^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+(?:[ '-][A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)*$";
+    /** Expresión regular que define el formato válido de un correo electrónico */
+    public static final String FORMAT = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
 
 //--------------------------------------------------------------------------------------------------------------------\\
 //---| CONSTRUCTOR |--------------------------------------------------------------------------------------------------\\
 //--------------------------------------------------------------------------------------------------------------------\\
 
-    public UserName( final String value ){
-        this.value = Optional.ofNullable( value ).map( String::trim ).orElse( null );
-        if( Objects.isNull( this.value )) throw new IllegalArgumentException( "UserName value cannot be null" );
-        if( !validateMinSize( this.value )) throw new IllegalArgumentException( "UserName value minimum size is %d: { \"value\": \"%s\" }".formatted( MIN_SIZE, value ));
-        if( !validateMaxSize( this.value )) throw new IllegalArgumentException( "UserName value maximum size is %d: { \"value\": \"%s\" }".formatted( MAX_SIZE, value ));
-        if( !validateFormat( this.value )) throw new IllegalArgumentException( "UserName value format is invalid: { \"value\": \"%s\", \"regex\": \"%s\" }".formatted( value, FORMAT ));
+    public Email( final String value ){
+        this.value = Optional.ofNullable( value ).map( String::toLowerCase ).map( String::trim ).orElse( null );
+        if( Objects.isNull( this.value )) throw new IllegalArgumentException( "Email value cannot be null" );
+        if( !validateMinSize( this.value )) throw new IllegalArgumentException( "Email value minimum size is %d: { \"value\": \"%s\" }".formatted( MIN_SIZE, value ));
+        if( !validateMaxSize( this.value ) ) throw new IllegalArgumentException( "Email value maximum size is %d: { \"value\": \"%s\" }".formatted( MAX_SIZE, value ));
+        if( !validateFormat( this.value )) throw new IllegalArgumentException( "Email value format is invalid: { \"value\": \"%s\", \"regex\": \"%s\" }".formatted( value, FORMAT ));
     }
 
 //--------------------------------------------------------------------------------------------------------------------\\
@@ -33,7 +31,7 @@ public record UserName( String value ) implements ValueObject<String>{
 //--------------------------------------------------------------------------------------------------------------------\\
 
     public static boolean test( final String candidate ){
-        return ValueObject.test( () -> new UserName( candidate ));
+        return ValueObject.test( () -> new Email( candidate ));
     }
 
     public static boolean validateMinSize( final String candidate ){

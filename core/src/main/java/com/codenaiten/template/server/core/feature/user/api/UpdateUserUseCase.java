@@ -1,7 +1,7 @@
 package com.codenaiten.template.server.core.feature.user.api;
 
-import com.codenaiten.template.server.core.feature.user.command.UpdateUserCommand;
-import com.codenaiten.template.server.core.feature.user.dto.UserPrivateInfo;
+import com.codenaiten.template.server.core.feature.user.dto.command.UpdateUserCommand;
+import com.codenaiten.template.server.core.feature.user.dto.result.UserPrivateInfo;
 
 import java.util.UUID;
 

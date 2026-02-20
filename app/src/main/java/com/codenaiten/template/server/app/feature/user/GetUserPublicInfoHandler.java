@@ -1,9 +1,9 @@
 package com.codenaiten.template.server.app.feature.user;
 
 import com.codenaiten.template.server.app.feature.user.mapper.UserMapper;
-import com.codenaiten.template.server.core.feature.user.User;
+import com.codenaiten.template.server.core.feature.user.model.User;
 import com.codenaiten.template.server.core.feature.user.api.GetUserPublicInfoUseCase;
-import com.codenaiten.template.server.core.feature.user.dto.UserPublicInfo;
+import com.codenaiten.template.server.core.feature.user.dto.result.UserPublicInfo;
 import com.codenaiten.template.server.core.feature.user.exception.UserNotFoundException;
 import com.codenaiten.template.server.core.feature.user.spi.UserRepositoryPort;
 import lombok.RequiredArgsConstructor;

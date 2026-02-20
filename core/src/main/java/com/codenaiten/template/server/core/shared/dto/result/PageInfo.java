@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.core.shared.dto;
+package com.codenaiten.template.server.core.shared.dto.result;
 
 import java.util.List;
 

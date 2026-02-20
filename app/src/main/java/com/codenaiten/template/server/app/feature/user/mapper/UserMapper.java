@@ -1,10 +1,10 @@
 package com.codenaiten.template.server.app.feature.user.mapper;
 
 import com.codenaiten.template.server.app.shared.mapper.OptionalMapper;
-import com.codenaiten.template.server.core.feature.user.User;
-import com.codenaiten.template.server.core.feature.user.dto.UserPrivateInfo;
-import com.codenaiten.template.server.core.feature.user.dto.UserPublicInfo;
-import com.codenaiten.template.server.core.shared.dto.PageInfo;
+import com.codenaiten.template.server.core.feature.user.model.User;
+import com.codenaiten.template.server.core.feature.user.dto.result.UserPrivateInfo;
+import com.codenaiten.template.server.core.feature.user.dto.result.UserPublicInfo;
+import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
 import org.mapstruct.Mapper;
 
 import java.util.List;

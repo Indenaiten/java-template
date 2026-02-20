@@ -1,6 +1,6 @@
 package com.codenaiten.template.server.core.feature.user.api;
 
-import com.codenaiten.template.server.core.feature.user.dto.UserPublicInfo;
+import com.codenaiten.template.server.core.feature.user.dto.result.UserPublicInfo;
 
 import java.util.UUID;
 

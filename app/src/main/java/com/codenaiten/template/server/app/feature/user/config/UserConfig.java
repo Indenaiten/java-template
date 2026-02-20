@@ -1,8 +1,8 @@
 package com.codenaiten.template.server.app.feature.user.config;
 
 import com.codenaiten.template.server.core.feature.user.policy.UserAccessPolicy;
-import com.codenaiten.template.server.core.feature.user.service.UserAuthService;
-import com.codenaiten.template.server.core.feature.user.service.UserService;
+import com.codenaiten.template.server.core.feature.user.UserAuthService;
+import com.codenaiten.template.server.core.feature.user.UserService;
 import com.codenaiten.template.server.core.feature.user.spi.UserAuthProviderPort;
 import com.codenaiten.template.server.core.feature.user.spi.UserPropertiesPort;
 import com.codenaiten.template.server.core.feature.user.spi.UserRepositoryPort;

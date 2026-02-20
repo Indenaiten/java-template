@@ -1,6 +1,6 @@
 package com.codenaiten.template.server.core.feature.user.spec;
 
-import com.codenaiten.template.server.core.feature.user.User;
+import com.codenaiten.template.server.core.feature.user.model.User;
 import com.codenaiten.template.server.core.feature.user.spi.UserPropertiesPort;
 import com.codenaiten.template.server.core.shared.spec.Specification;
 import lombok.NonNull;

@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.core.feature.user.command;
+package com.codenaiten.template.server.core.feature.user.dto.command;
 
 import lombok.Data;
 import lombok.NonNull;

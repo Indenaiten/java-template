@@ -1,10 +1,10 @@
-package com.codenaiten.template.server.core.feature.user;
+package com.codenaiten.template.server.core.feature.user.model;
 
-import com.codenaiten.template.server.core.feature.user.vo.UserName;
-import com.codenaiten.template.server.core.feature.user.vo.UserSurname;
-import com.codenaiten.template.server.core.feature.user.vo.UserUsername;
-import com.codenaiten.template.server.core.shared.entity.Entity;
-import com.codenaiten.template.server.core.shared.vo.Email;
+import com.codenaiten.template.server.core.feature.user.model.vo.UserName;
+import com.codenaiten.template.server.core.feature.user.model.vo.UserSurname;
+import com.codenaiten.template.server.core.feature.user.model.vo.UserUsername;
+import com.codenaiten.template.server.core.shared.model.entity.Entity;
+import com.codenaiten.template.server.core.shared.model.vo.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

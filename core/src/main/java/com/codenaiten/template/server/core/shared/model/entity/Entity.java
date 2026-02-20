@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.core.shared.entity;
+package com.codenaiten.template.server.core.shared.model.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

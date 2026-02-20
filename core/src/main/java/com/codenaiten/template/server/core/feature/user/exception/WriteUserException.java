@@ -1,6 +1,6 @@
 package com.codenaiten.template.server.core.feature.user.exception;
 
-import com.codenaiten.template.server.core.feature.user.User;
+import com.codenaiten.template.server.core.feature.user.model.User;
 import com.codenaiten.template.server.core.shared.exception.AppException;
 import lombok.Getter;
 

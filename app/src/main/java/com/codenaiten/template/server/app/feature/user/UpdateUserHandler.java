@@ -1,14 +1,14 @@
 package com.codenaiten.template.server.app.feature.user;
 
 import com.codenaiten.template.server.app.feature.user.mapper.UserMapper;
-import com.codenaiten.template.server.core.feature.user.User;
+import com.codenaiten.template.server.core.feature.user.model.User;
 import com.codenaiten.template.server.core.feature.user.api.UpdateUserUseCase;
-import com.codenaiten.template.server.core.feature.user.command.UpdateUserCommand;
-import com.codenaiten.template.server.core.feature.user.dto.UserPrivateInfo;
+import com.codenaiten.template.server.core.feature.user.dto.command.UpdateUserCommand;
+import com.codenaiten.template.server.core.feature.user.dto.result.UserPrivateInfo;
 import com.codenaiten.template.server.core.feature.user.exception.UserNotFoundException;
 import com.codenaiten.template.server.core.feature.user.policy.UserAccessPolicy;
-import com.codenaiten.template.server.core.feature.user.service.UserAuthService;
-import com.codenaiten.template.server.core.feature.user.service.UserService;
+import com.codenaiten.template.server.core.feature.user.UserAuthService;
+import com.codenaiten.template.server.core.feature.user.UserService;
 import com.codenaiten.template.server.core.feature.user.spi.UserRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

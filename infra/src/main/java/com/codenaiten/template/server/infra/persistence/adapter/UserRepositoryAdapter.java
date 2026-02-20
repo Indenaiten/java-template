@@ -1,8 +1,8 @@
 package com.codenaiten.template.server.infra.persistence.adapter;
 
-import com.codenaiten.template.server.core.feature.user.User;
+import com.codenaiten.template.server.core.feature.user.model.User;
 import com.codenaiten.template.server.core.feature.user.spi.UserRepositoryPort;
-import com.codenaiten.template.server.core.shared.dto.PageInfo;
+import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
 import com.codenaiten.template.server.infra.persistence.entity.UserJpaEntity;
 import com.codenaiten.template.server.infra.persistence.mapper.UserJpaMapper;
 import com.codenaiten.template.server.infra.persistence.repository.UserJpaRepository;
