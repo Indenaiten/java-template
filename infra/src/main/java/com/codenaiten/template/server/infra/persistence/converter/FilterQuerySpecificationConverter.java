@@ -1,6 +1,7 @@
 package com.codenaiten.template.server.infra.persistence.converter;
 
 import com.codenaiten.template.server.core.shared.dto.query.FilterQuery;
+import jakarta.persistence.Entity;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
@@ -28,7 +29,7 @@ public final class FilterQuerySpecificationConverter {
      *
      * @return {@link Specification} La especificación JPA equivalente.
      */
-    public static <E> Specification<E> convert( final FilterQuery<? extends FilterQuery.Field> filterQuery ) {
+    public static <E> Specification<E> convert( final FilterQuery filterQuery, final Class<E> clazz ) {
         if ( filterQuery == null || filterQuery.isEmpty() ) {
             return ( root, query, cb ) -> cb.conjunction();
         }
@@ -36,10 +37,10 @@ public final class FilterQuerySpecificationConverter {
         return ( root, query, cb ) -> {
             final List<Predicate> groupPredicates = new ArrayList<>();
 
-            for ( final FilterQuery.Group<? extends FilterQuery.Field> group : filterQuery.getGroups() ) {
+            for ( final FilterQuery.Group group : filterQuery.getGroups() ) {
                 final List<Predicate> conditionPredicates = new ArrayList<>();
 
-                for ( final FilterQuery.Condition<? extends FilterQuery.Field> condition : group.getConditions() ) {
+                for ( final FilterQuery.Condition condition : group.getConditions() ) {
                     final Predicate predicate = toPredicate( condition, root, cb );
                     conditionPredicates.add( predicate );
                 }
@@ -62,7 +63,7 @@ public final class FilterQuerySpecificationConverter {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     private static <E> Predicate toPredicate(
-            final FilterQuery.Condition<? extends FilterQuery.Field> condition,
+            final FilterQuery.Condition condition,
             final Root<E> root,
             final CriteriaBuilder cb
     ) {

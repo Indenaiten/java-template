@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.time.temporal.Temporal;
 import java.util.*;
 
-public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
+public record FilterQuery( List<Group> groups ){
 
 // ------------------------------------------------------------------------------------------------------------------ \\
 // ---| STATIC FACTORY METHODS |------------------------------------------------------------------------------------- \\
@@ -19,9 +19,9 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link Condition} La condición de filtro.
      */
-    public static <T extends FilterQuery.Field> Condition<T> equals( final T field, final Object value ) {
+    public static Condition equals( final Field field, final Object value ) {
         validateValueType( field, value );
-        return new Condition<>( field, Operator.EQUALS, value );
+        return new Condition( field, Operator.EQUALS, value );
     }
 
     /**
@@ -32,9 +32,9 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link Condition} La condición de filtro.
      */
-    public static <T extends FilterQuery.Field> Condition<T> notEquals( final T field, final Object value ) {
+    public static Condition notEquals( final Field field, final Object value ) {
         validateValueType( field, value );
-        return new Condition<>( field, Operator.NOT_EQUALS, value );
+        return new Condition( field, Operator.NOT_EQUALS, value );
     }
 
     /**
@@ -45,10 +45,10 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link Condition} La condición de filtro.
      */
-    public static <T extends FilterQuery.Field> Condition<T> greaterThan( final T field, final Object value ) {
+    public static Condition greaterThan( final Field field, final Object value ) {
         validateComparable( field );
         validateValueType( field, value );
-        return new Condition<>( field, Operator.GREATER_THAN, value );
+        return new Condition( field, Operator.GREATER_THAN, value );
     }
 
     /**
@@ -59,10 +59,10 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link Condition} La condición de filtro.
      */
-    public static <T extends FilterQuery.Field> Condition<T> greaterThanOrEquals( final T field, final Object value ) {
+    public static Condition greaterThanOrEquals( final Field field, final Object value ) {
         validateComparable( field );
         validateValueType( field, value );
-        return new Condition<>( field, Operator.GREATER_THAN_OR_EQUALS, value );
+        return new Condition( field, Operator.GREATER_THAN_OR_EQUALS, value );
     }
 
     /**
@@ -73,10 +73,10 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link Condition} La condición de filtro.
      */
-    public static <T extends FilterQuery.Field> Condition<T> lessThan( final T field, final Object value ) {
+    public static Condition lessThan( final Field field, final Object value ) {
         validateComparable( field );
         validateValueType( field, value );
-        return new Condition<>( field, Operator.LESS_THAN, value );
+        return new Condition( field, Operator.LESS_THAN, value );
     }
 
     /**
@@ -87,10 +87,10 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link Condition} La condición de filtro.
      */
-    public static <T extends FilterQuery.Field> Condition<T> lessThanOrEquals( final T field, final Object value ) {
+    public static Condition lessThanOrEquals( final Field field, final Object value ) {
         validateComparable( field );
         validateValueType( field, value );
-        return new Condition<>( field, Operator.LESS_THAN_OR_EQUALS, value );
+        return new Condition( field, Operator.LESS_THAN_OR_EQUALS, value );
     }
 
     /**
@@ -101,9 +101,9 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link Condition} La condición de filtro.
      */
-    public static <T extends FilterQuery.Field> Condition<T> like( final T field, final String value ) {
+    public static Condition like( final Field field, final String value ) {
         validateString( field );
-        return new Condition<>( field, Operator.LIKE, value );
+        return new Condition( field, Operator.LIKE, value );
     }
 
     /**
@@ -114,9 +114,9 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link Condition} La condición de filtro.
      */
-    public static <T extends FilterQuery.Field> Condition<T> notLike( final T field, final String value ) {
+    public static Condition notLike( final Field field, final String value ) {
         validateString( field );
-        return new Condition<>( field, Operator.NOT_LIKE, value );
+        return new Condition( field, Operator.NOT_LIKE, value );
     }
 
     /**
@@ -127,9 +127,9 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link Condition} La condición de filtro.
      */
-    public static <T extends FilterQuery.Field> Condition<T> in( final T field, final Collection<?> values ) {
+    public static Condition in( final Field field, final Collection<?> values ) {
         validateCollectionTypes( field, values );
-        return new Condition<>( field, Operator.IN, values );
+        return new Condition( field, Operator.IN, values );
     }
 
     /**
@@ -140,9 +140,9 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link Condition} La condición de filtro.
      */
-    public static <T extends FilterQuery.Field> Condition<T> notIn( final T field, final Collection<?> values ) {
+    public static Condition notIn( final Field field, final Collection<?> values ) {
         validateCollectionTypes( field, values );
-        return new Condition<>( field, Operator.NOT_IN, values );
+        return new Condition( field, Operator.NOT_IN, values );
     }
 
     /**
@@ -154,11 +154,11 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link Condition} La condición de filtro.
      */
-    public static <T extends FilterQuery.Field> Condition<T> between( final T field, final Object start, final Object end ) {
+    public static Condition between( final Field field, final Object start, final Object end ) {
         validateComparable( field );
         validateValueType( field, start );
         validateValueType( field, end );
-        return new Condition<>( field, Operator.BETWEEN, new Object[]{ start, end } );
+        return new Condition( field, Operator.BETWEEN, new Object[]{ start, end } );
     }
 
     /**
@@ -168,8 +168,8 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link Condition} La condición de filtro.
      */
-    public static <T extends FilterQuery.Field> Condition<T> isNull( final T field ) {
-        return new Condition<>( field, Operator.IS_NULL, null );
+    public static Condition isNull( final Field field ) {
+        return new Condition( field, Operator.IS_NULL, null );
     }
 
     /**
@@ -179,8 +179,8 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link Condition} La condición de filtro.
      */
-    public static <T extends FilterQuery.Field> Condition<T> isNotNull( final T field ) {
-        return new Condition<T>( field, Operator.IS_NOT_NULL, null );
+    public static Condition isNotNull( final Field field ) {
+        return new Condition( field, Operator.IS_NOT_NULL, null );
     }
 
     /**
@@ -190,8 +190,8 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link FilterBuilder} Builder para continuar construyendo el filtro.
      */
-    public static <T extends FilterQuery.Field> FilterBuilder<T> and( final List<Condition<T>> conditions ) {
-        return new FilterBuilder<T>().and( conditions );
+    public static FilterBuilder and( final List<Condition> conditions ) {
+        return new FilterBuilder().and( conditions );
     }
 
     /**
@@ -201,8 +201,8 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link FilterBuilder} Builder para continuar construyendo el filtro.
      */
-    public static <T extends FilterQuery.Field> FilterBuilder<T> or( final List<Condition<T>> conditions ) {
-        return new FilterBuilder<T>().or( conditions );
+    public static FilterBuilder or( final List<Condition> conditions ) {
+        return new FilterBuilder().or( conditions );
     }
 
     /**
@@ -212,8 +212,8 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link FilterBuilder} Builder para continuar construyendo el filtro.
      */
-    public static <T extends FilterQuery.Field> FilterBuilder<T> where( final Condition<T> condition ) {
-        return new FilterBuilder<T>().and( List.of( condition ) );
+    public static FilterBuilder where( final Condition condition ) {
+        return new FilterBuilder().and( List.of( condition ) );
     }
 
 // ------------------------------------------------------------------------------------------------------------------ \\
@@ -225,7 +225,7 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      *
      * @return {@link List} Lista inmutable de grupos de filtros.
      */
-    public List<Group<T>> getGroups() {
+    public List<Group> getGroups() {
         return Collections.unmodifiableList( this.groups );
     }
 
@@ -277,19 +277,19 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
     /**
      * Representa una condición individual de filtro.
      */
-    public static class Condition<T extends FilterQuery.Field>{
+    public static class Condition{
 
-        private final T field;
+        private final Field field;
         private final Operator operator;
         private final Object value;
 
-        public Condition( final T field, final Operator operator, final Object value ) {
+        public Condition( final Field field, final Operator operator, final Object value ) {
             this.field = Objects.requireNonNull( field, "El campo no puede ser nulo" );
             this.operator = Objects.requireNonNull( operator, "El operador no puede ser nulo" );
             this.value = value;
         }
 
-        public T getField() {
+        public Field getField() {
             return this.field;
         }
 
@@ -311,17 +311,17 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      * Representa un grupo de condiciones unidas por un operador lógico.
      */
     @Getter
-    public static class Group<T extends FilterQuery.Field>{
+    public static class Group{
 
         private final LogicalOperator logicalOperator;
-        private final List<Condition<T>> conditions;
+        private final List<Condition> conditions;
 
-        public Group( final LogicalOperator logicalOperator, final List<Condition<T>> conditions ) {
+        public Group( final LogicalOperator logicalOperator, final List<Condition> conditions ) {
             this.logicalOperator = Objects.requireNonNull( logicalOperator, "El operador lógico no puede ser nulo" );
-            this.conditions = new ArrayList<>( Objects.requireNonNull( conditions, "Las condiciones no pueden ser nulas" ) );
+            this.conditions = new ArrayList( Objects.requireNonNull( conditions, "Las condiciones no pueden ser nulas" ) );
         }
 
-        public List<Condition<T>> getConditions() {
+        public List<Condition> getConditions() {
             return Collections.unmodifiableList( this.conditions );
         }
 
@@ -334,12 +334,12 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
     /**
      * Builder para construir filtros de forma fluida.
      */
-    public static class FilterBuilder<T extends FilterQuery.Field> {
+    public static class FilterBuilder {
 
-        private final List<Group<T>> groups;
+        private final List<Group> groups;
 
         private FilterBuilder() {
-            this.groups = new ArrayList<>();
+            this.groups = new ArrayList();
         }
 
         /**
@@ -349,9 +349,9 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
          *
          * @return {@link FilterBuilder} Este builder para encadenamiento.
          */
-        public FilterBuilder<T> and( final List<Condition<T>> conditions ) {
+        public FilterBuilder and( final List<Condition> conditions ) {
             if ( Objects.nonNull( conditions ) && !conditions.isEmpty() ) {
-                this.groups.add( new Group<>( LogicalOperator.AND, conditions ) );
+                this.groups.add( new Group( LogicalOperator.AND, conditions ) );
             }
             return this;
         }
@@ -363,9 +363,9 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
          *
          * @return {@link FilterBuilder} Este builder para encadenamiento.
          */
-        public FilterBuilder<T> or( final List<Condition<T>> conditions ) {
+        public FilterBuilder or( final List<Condition> conditions ) {
             if ( Objects.nonNull( conditions ) && !conditions.isEmpty() ) {
-                this.groups.add( new Group<>( LogicalOperator.OR, conditions ) );
+                this.groups.add( new Group( LogicalOperator.OR, conditions ) );
             }
             return this;
         }
@@ -375,8 +375,8 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
          *
          * @return {@link FilterQuery} El filtro construido.
          */
-        public FilterQuery<T> build() {
-            return new FilterQuery<>( this.groups );
+        public FilterQuery build() {
+            return new FilterQuery( this.groups );
         }
     }
 

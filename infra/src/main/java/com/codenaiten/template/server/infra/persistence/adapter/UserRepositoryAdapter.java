@@ -1,6 +1,5 @@
 package com.codenaiten.template.server.infra.persistence.adapter;
 
-import com.codenaiten.template.server.core.feature.user.dto.UserField;
 import com.codenaiten.template.server.core.feature.user.model.User;
 import com.codenaiten.template.server.core.feature.user.spi.UserRepositoryPort;
 import com.codenaiten.template.server.core.shared.dto.query.FilterQuery;
@@ -56,12 +55,12 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     }
 
     @Override
-    public PageInfo<User> search( final FilterQuery<UserField> filterQuery, final PageQuery pageQuery ){
-        final Specification<UserJpaEntity> specification = FilterQuerySpecificationConverter.convert( filterQuery );
-        final Sort sort = Sort.by( Sort.Direction.ASC, UserField.CREATED_AT.getName() );
-        final Pageable pageable = PageRequest.of( pageQuery.page(), pageQuery.size(), sort );
+    public PageInfo<User> search( final FilterQuery filterQuery, final PageQuery pageQuery ){
+        final Specification<UserJpaEntity> specification = FilterQuerySpecificationConverter.convert( filterQuery, UserJpaEntity.class );
+        final Sort sort = Sort.by( Sort.Direction.ASC, "createdAt" );
+        final Pageable pageable = PageRequest.of( pageQuery.number(), pageQuery.size(), sort );
         final org.springframework.data.domain.Page<UserJpaEntity> result = this.userRepository.findAll( specification, pageable );
         final List<User> content = result.getContent().stream().map( this.userMapper::toEntity ).toList();
-        return new PageInfo<>( result.getTotalElements(), result.getTotalPages(), pageQuery.page(), pageQuery.size(), content );
+        return new PageInfo<>( result.getTotalElements(), result.getTotalPages(), pageQuery.number(), pageQuery.size(), content );
     }
 }

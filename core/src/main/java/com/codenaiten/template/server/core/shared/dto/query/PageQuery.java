@@ -2,12 +2,12 @@ package com.codenaiten.template.server.core.shared.dto.query;
 
 import java.util.Optional;
 
-public record PageQuery( Integer page, Integer size){
+public record PageQuery( Integer number, Integer size ){
 
-    public Integer page(){
-        return Optional.ofNullable( this.page ).orElse( 0 );
+    public Integer number(){
+        return Optional.ofNullable( this.number ).orElse( 0 );
     }
     public Integer size(){
-        return Optional.ofNullable( this.page ).orElse( 25 );
+        return Optional.ofNullable( this.number ).orElse( 25 );
     }
 }

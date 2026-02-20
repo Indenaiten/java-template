@@ -1,7 +1,7 @@
 package com.codenaiten.template.server.app.feature.user;
 
 import com.codenaiten.template.server.app.feature.user.mapper.UserMapper;
-import com.codenaiten.template.server.core.feature.user.dto.UserField;
+import com.codenaiten.template.server.core.feature.user.dto.query.SearchUserQuery;
 import com.codenaiten.template.server.core.feature.user.model.User;
 import com.codenaiten.template.server.core.feature.user.api.SearchUserInfoUseCase;
 import com.codenaiten.template.server.core.feature.user.dto.result.UserPublicInfo;
@@ -22,9 +22,9 @@ public class SearchUserHandler implements SearchUserInfoUseCase {
     private final UserMapper userMapper;
 
     @Override
-    public PageInfo<UserPublicInfo> run( final FilterQuery<UserField> filterQuery, final PageQuery pageQuery ) {
+    public PageInfo<UserPublicInfo> run( final SearchUserQuery query ) {
         // Step 01: Search Users
-        final PageInfo<User> page = this.userRepositoryPort.search( filterQuery, pageQuery );
+        final PageInfo<User> page = this.userRepositoryPort.search( query.filterQuery(), query.pageQuery() );
 
         // Step 02: Return User Public Info PAge
         return this.userMapper.toPublicInfo( page );
