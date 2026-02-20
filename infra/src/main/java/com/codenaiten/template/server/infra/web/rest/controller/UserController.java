@@ -7,14 +7,14 @@ import com.codenaiten.template.server.core.feature.user.dto.result.UserPrivateIn
 import com.codenaiten.template.server.core.feature.user.dto.result.UserPublicInfo;
 import com.codenaiten.template.server.core.shared.dto.query.PageQuery;
 import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
+import com.codenaiten.template.server.infra.web.rest.api.feature.user.UserApi;
+import com.codenaiten.template.server.infra.web.rest.api.feature.user.request.CreateUserRequest;
+import com.codenaiten.template.server.infra.web.rest.api.feature.user.request.UpdateUserRequest;
+import com.codenaiten.template.server.infra.web.rest.api.feature.user.response.UserPrivateInfoResponse;
+import com.codenaiten.template.server.infra.web.rest.api.feature.user.response.UserPublicInfoResponse;
+import com.codenaiten.template.server.infra.web.rest.api.shared.response.PageResponse;
+import com.codenaiten.template.server.infra.web.rest.api.shared.response.RestResponse;
 import com.codenaiten.template.server.infra.web.rest.mapper.UserRestMapper;
-import com.codenaiten.template.server.infra.web.rest.user.api.UserApi;
-import com.codenaiten.template.server.infra.web.rest.user.dto.request.CreateUserRequest;
-import com.codenaiten.template.server.infra.web.rest.user.dto.request.UpdateUserRequest;
-import com.codenaiten.template.server.infra.web.rest.user.dto.response.UserPrivateInfoResponse;
-import com.codenaiten.template.server.infra.web.rest.user.dto.response.UserPublicInfoResponse;
-import com.codenaiten.template.server.infra.web.rest.shared.dto.response.PageResponse;
-import com.codenaiten.template.server.infra.web.rest.shared.dto.response.RestResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +36,7 @@ public class UserController implements UserApi {
     private final UpdateUserUseCase updateUserUseCase;
 
     @Override
-    public ResponseEntity<RestResponse<UserPrivateInfoResponse>> register( final CreateUserRequest request ) {
+    public ResponseEntity<RestResponse<UserPrivateInfoResponse>> register(final CreateUserRequest request ) {
         final RegisterUserCommand command = this.userMapper.toCommand( request );
         final UserPrivateInfo result = this.registerUserUseCase.run( command );
         final UserPrivateInfoResponse data = this.userMapper.toResponse( result );
@@ -54,7 +54,7 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<RestResponse<PageResponse<UserPublicInfoResponse>>> getAll( final Integer page, final Integer size ) {
+    public ResponseEntity<RestResponse<PageResponse<UserPublicInfoResponse>>> getAll(final Integer page, final Integer size ) {
         final PageQuery query = new PageQuery( page, size );
         final PageInfo<UserPublicInfo> result = this.findAllUsersPublicInfoUseCase.run( query );
         final PageResponse<UserPublicInfoResponse> data = this.userMapper.toResponse( result );
@@ -63,7 +63,7 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<RestResponse<UserPublicInfoResponse>> getPublicInfo( final UUID userId ) {
+    public ResponseEntity<RestResponse<UserPublicInfoResponse>> getPublicInfo(final UUID userId ) {
         final UserPublicInfo result = this.getUserPublicInfoUseCase.run( userId );
         final UserPublicInfoResponse data = this.userMapper.toResponse( result );
         final var response = RestResponse.success().build( data );
