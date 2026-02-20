@@ -1,7 +1,10 @@
 package com.codenaiten.template.server.infra.persistence.adapter;
 
+import com.codenaiten.template.server.core.feature.user.dto.UserField;
 import com.codenaiten.template.server.core.feature.user.model.User;
 import com.codenaiten.template.server.core.feature.user.spi.UserRepositoryPort;
+import com.codenaiten.template.server.core.shared.dto.query.FilterQuery;
+import com.codenaiten.template.server.core.shared.dto.query.PageQuery;
 import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
 import com.codenaiten.template.server.infra.persistence.entity.UserJpaEntity;
 import com.codenaiten.template.server.infra.persistence.mapper.UserJpaMapper;
@@ -51,9 +54,9 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     }
 
     @Override
-    public PageInfo<User> search(final String search, final int page, final int size ){
+    public PageInfo<User> search( final FilterQuery<UserField> filterQuery, final PageQuery pageQuery ){
         final Sort sort = Sort.by( Sort.Direction.ASC, "createdAt" );
-        final Pageable pageable = PageRequest.of(page, size, sort);
+        final Pageable pageable = PageRequest.of( pageQuery.page(), pageQuery.size(), sort );
         final org.springframework.data.domain.Page<UserJpaEntity> result = this.userRepository.search( search, pageable );
         List<User> content = result.getContent().stream().map( this.userMapper::toEntity ).toList();
         return new PageInfo<>( result.getTotalElements(), result.getTotalPages(), page, size, content );
