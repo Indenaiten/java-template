@@ -12,9 +12,9 @@
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>rest-server-app</artifactId>
-    <name>Rest Server - App</name>
-    <description>App Module Description</description>
+    <artifactId>rest-server-boot</artifactId>
+    <name>Rest Server - Boot</name>
+    <description>Boot Module Description</description>
     <packaging>jar</packaging>
 
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -26,6 +26,21 @@
             <artifactId>rest-server-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>rest-server-app</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>rest-server-infra</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>rest-server-web</artifactId>
+        </dependency>
+
         <!-- SPRINGBOOT -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -33,8 +48,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <!-- LOMBOK -->
@@ -42,12 +57,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-        </dependency>
-
-        <!-- MAPSTRUCT -->
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
         </dependency>
 
         <!-- ARCHJUNIT -->

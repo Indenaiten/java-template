@@ -23,9 +23,11 @@
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <modules>
-        <module>app</module>
+        <module>boot</module>
         <module>core</module>
+        <module>app</module>
         <module>infra</module>
+        <module>web</module>
     </modules>
 
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -49,6 +51,12 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>rest-server-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>rest-server-app</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

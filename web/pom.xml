@@ -12,9 +12,9 @@
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>rest-server-app</artifactId>
-    <name>Rest Server - App</name>
-    <description>App Module Description</description>
+    <artifactId>rest-server-web</artifactId>
+    <name>Rest Server - Web</name>
+    <description>Web Module Description</description>
     <packaging>jar</packaging>
 
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -29,12 +29,7 @@
         <!-- SPRINGBOOT -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <!-- LOMBOK -->
@@ -44,10 +39,10 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- MAPSTRUCT -->
+        <!-- SPRINGDOC OPENAPI -->
         <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
         </dependency>
 
         <!-- ARCHJUNIT -->
@@ -75,6 +70,10 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <scope>message</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
         </dependency>
     </dependencies>
 
