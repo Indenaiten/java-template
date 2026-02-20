@@ -24,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -37,12 +36,12 @@ public class UserService {
 
     public User create( final RegisterUserCommand command ){
         final UUID id = UUID.randomUUID();
-        final Email email = new Email( command.getEmail() );
-        final UserUsername username = new UserUsername( command.getUsername() );
-        final UserName name = new UserName( command.getName() );
-        final UserSurname surname = command.getSurname().map( UserSurname::new ).orElse( null );
-        final LocalDate birthdate = command.getBirthdate();
-        final UserPassword password = new UserPassword( command.getPassword() );
+        final Email email = new Email( command.email() );
+        final UserUsername username = new UserUsername( command.username() );
+        final UserName name = new UserName( command.name() );
+        final UserSurname surname = command.surname().map( UserSurname::new ).orElse( null );
+        final LocalDate birthdate = command.birthdate();
+        final UserPassword password = new UserPassword( command.password() );
         final String hashedPassword = this.passwordCrypter.hash( password.value() );
         final User user = User.create( email, username, name, surname, birthdate, hashedPassword );
 
@@ -64,41 +63,57 @@ public class UserService {
     public User update( final User user, final UpdateUserCommand command ){
         final User update = user.copy();
 
-        final Email email = Optional.ofNullable( command.getEmail() ).map( Email::new ).orElse( null );
-        if( Objects.nonNull( email ) && update.different( email )) {
-            final UserEmailUniqueSpec userEmailUniqueSpec = new UserEmailUniqueSpec( this.userRepositoryPort );
-            if( userEmailUniqueSpec.not().test( update )) throw new UserEmailUniqueException( email.value() );
-            log.debug( "User {}: Updated email: {}", user.getId(), email );
+        if( command.email().isPresent() ) {
+            final Email email = command.email().get().map( Email::new )
+                    .orElseThrow( () -> new IllegalArgumentException( "User Email to update is required" ));
+            if( update.updateEmail( email )) {
+                final UserEmailUniqueSpec userEmailUniqueSpec = new UserEmailUniqueSpec( this.userRepositoryPort );
+                if( userEmailUniqueSpec.not().test( update )) throw new UserEmailUniqueException( email.value() );
+                log.debug( "User {}: Updated email: {}", user.getId(), email );
+            }
         }
 
-        final UserUsername username = Optional.ofNullable( command.getUsername() ).map( UserUsername::new ).orElse( null );
-        if( Objects.nonNull( username ) && update.different( username )) {
-            final UserUsernameUniqueSpec userUsernameUniqueSpec = new UserUsernameUniqueSpec( this.userRepositoryPort );
-            if( userUsernameUniqueSpec.not().test( update )) throw new UserUsernameUniqueException( username.value() );
-            log.debug( "User {}: Updated username: {}", user.getId(), username );
+        if( command.username().isPresent() ) {
+            final UserUsername username = command.username().get().map( UserUsername::new )
+                    .orElseThrow( () -> new IllegalArgumentException( "User Username to update is required" ));
+            if( update.updateUsername( username )) {
+                final UserUsernameUniqueSpec userUsernameUniqueSpec = new UserUsernameUniqueSpec( this.userRepositoryPort );
+                if( userUsernameUniqueSpec.not().test( update )) throw new UserUsernameUniqueException( username.value() );
+                log.debug( "User {}: Updated username: {}", user.getId(), username );
+            }
         }
 
-        final UserName name = Optional.ofNullable( command.getName() ).map( UserName::new ).orElse( null );
-        if( Objects.nonNull( name ) && update.updateName( name )){
-            log.debug( "User {}: Updated name: {}", user.getId(), name );
+        if( command.name().isPresent() ) {
+            final UserName name = command.name().get().map( UserName::new )
+                    .orElseThrow( () -> new IllegalArgumentException( "User Name to update is required" ));
+            if( update.updateName( name )){
+                log.debug( "User {}: Updated name: {}", user.getId(), name );
+            }
         }
 
-        final Optional<UserSurname> surname = Optional.ofNullable( command.getSurname() )
-                .map( opt -> opt.map( UserSurname::new )).orElse( null );
-        if( Objects.nonNull( surname ) && update.updateSurname( surname.orElse( null ))){
-            log.debug( "User {}: Updated surname: {}", user.getId(), surname );
+        if( command.surname().isPresent() ) {
+            final UserSurname surname = command.surname().get().map( UserSurname::new ).orElse( null );
+            if( update.updateSurname( surname )){
+                log.debug( "User {}: Updated surname: {}", user.getId(), surname );
+            }
         }
 
-        final LocalDate birthdate = command.getBirthdate();
-        if( Objects.nonNull( birthdate ) && update.updateBirthdate( birthdate )) {
-            final UserMinimumAgeSpec userMinimumAgeSpec = new UserMinimumAgeSpec( this.userPropertiesPort );
-            if( userMinimumAgeSpec.not().test( update )) throw new UserMinimumAgeException( birthdate );
-            log.debug( "User {}: Updated birthdate: {}", user.getId(), birthdate );
+        if( command.birthdate().isPresent() ) {
+            final LocalDate birthdate = command.birthdate().get()
+                    .orElseThrow( () -> new IllegalArgumentException( "User Birthdate to update is required" ));
+            if( update.updateBirthdate( birthdate )) {
+                final UserMinimumAgeSpec userMinimumAgeSpec = new UserMinimumAgeSpec( this.userPropertiesPort );
+                if( userMinimumAgeSpec.not().test( update )) throw new UserMinimumAgeException( birthdate );
+                log.debug( "User {}: Updated birthdate: {}", user.getId(), birthdate );
+            }
         }
 
-        final UserPassword password = Optional.ofNullable( command.getPassword() ).map( UserPassword::new ).orElse( null );
-        if( Objects.nonNull( password ) && update.updatePassword( this.passwordCrypter.hash( password.value() ))) {
-            log.debug( "User {}: Updated password", user.getId() );
+        if( command.password().isPresent() ) {
+            final UserPassword password = command.password().get().map( UserPassword::new )
+                    .orElseThrow( () -> new IllegalArgumentException( "User Password to update is required" ));
+            if( update.updatePassword( this.passwordCrypter.hash( password.value() ))) {
+                log.debug( "User {}: Updated password", user.getId() );
+            }
         }
 
         return update;

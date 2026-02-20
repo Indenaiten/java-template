@@ -5,17 +5,7 @@ import lombok.Getter;
 import java.time.temporal.Temporal;
 import java.util.*;
 
-public class FilterQuery<T extends FilterQuery.Field>{
-
-    private List<Group<T>> groups;
-
-// ------------------------------------------------------------------------------------------------------------------ \\
-// ---| CONSTRUCTOR |------------------------------------------------------------------------------------------------ \\
-// ------------------------------------------------------------------------------------------------------------------ \\
-
-    public FilterQuery( final List<Group<T>> groups ) {
-        this.groups = new ArrayList<>( groups );
-    }
+public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
 
 // ------------------------------------------------------------------------------------------------------------------ \\
 // ---| STATIC FACTORY METHODS |------------------------------------------------------------------------------------- \\
