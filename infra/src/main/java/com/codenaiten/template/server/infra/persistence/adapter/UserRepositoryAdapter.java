@@ -9,11 +9,13 @@ import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
 import com.codenaiten.template.server.infra.persistence.entity.UserJpaEntity;
 import com.codenaiten.template.server.infra.persistence.mapper.UserJpaMapper;
 import com.codenaiten.template.server.infra.persistence.repository.UserJpaRepository;
+import com.codenaiten.template.server.infra.persistence.converter.FilterQuerySpecificationConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -55,10 +57,11 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
 
     @Override
     public PageInfo<User> search( final FilterQuery<UserField> filterQuery, final PageQuery pageQuery ){
-        final Sort sort = Sort.by( Sort.Direction.ASC, "createdAt" );
+        final Specification<UserJpaEntity> specification = FilterQuerySpecificationConverter.convert( filterQuery );
+        final Sort sort = Sort.by( Sort.Direction.ASC, UserField.CREATED_AT.name() );
         final Pageable pageable = PageRequest.of( pageQuery.page(), pageQuery.size(), sort );
-        final org.springframework.data.domain.Page<UserJpaEntity> result = this.userRepository.search( search, pageable );
-        List<User> content = result.getContent().stream().map( this.userMapper::toEntity ).toList();
-        return new PageInfo<>( result.getTotalElements(), result.getTotalPages(), page, size, content );
+        final org.springframework.data.domain.Page<UserJpaEntity> result = this.userRepository.findAll( specification, pageable );
+        final List<User> content = result.getContent().stream().map( this.userMapper::toEntity ).toList();
+        return new PageInfo<>( result.getTotalElements(), result.getTotalPages(), pageQuery.page(), pageQuery.size(), content );
     }
 }

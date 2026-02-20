@@ -3,6 +3,7 @@ package com.codenaiten.template.server.core.feature.user.dto;
 import com.codenaiten.template.server.core.shared.dto.query.FilterQuery;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 @Slf4j
 @Getter
+@Accessors( fluent = true )
 @RequiredArgsConstructor
 public enum UserField implements FilterQuery.Field{
     ID( "id", UUID.class ),

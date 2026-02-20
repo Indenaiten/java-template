@@ -270,8 +270,8 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
     }
 
     public interface Field {
-        String getName();
-        Class<?> getType();
+        String name();
+        Class<?> type();
     }
 
     /**
@@ -303,7 +303,7 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
 
         @Override
         public String toString() {
-            return String.format( "%s %s %s", this.field.getName(), this.operator, this.value );
+            return String.format( "%s %s %s", this.field.name(), this.operator, this.value );
         }
     }
 
@@ -403,11 +403,11 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
         if ( Objects.isNull( value ) ) {
             return;
         }
-        final Class<?> fieldType = field.getType();
+        final Class<?> fieldType = field.type();
         if ( !fieldType.isAssignableFrom( value.getClass() ) ) {
             throw new IllegalArgumentException( String.format(
                 "El valor '%s' de tipo '%s' no es compatible con el campo '%s' de tipo '%s'",
-                value, value.getClass().getSimpleName(), field.getName(), fieldType.getSimpleName()
+                value, value.getClass().getSimpleName(), field.name(), fieldType.getSimpleName()
             ));
         }
     }
@@ -420,7 +420,7 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      * @throws IllegalArgumentException Si el campo no es comparable.
      */
     private static void validateComparable( final Field field ) {
-        final Class<?> fieldType = field.getType();
+        final Class<?> fieldType = field.type();
         final boolean isComparable = Comparable.class.isAssignableFrom( fieldType )
                 || Number.class.isAssignableFrom( fieldType )
                 || Date.class.isAssignableFrom( fieldType )
@@ -431,7 +431,7 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
             throw new IllegalArgumentException( String.format(
                 "El campo '%s' de tipo '%s' no es comparable. " +
                 "Las operaciones de comparación solo están disponibles para tipos numéricos, fechas y comparables.",
-                field.getName(), fieldType.getSimpleName()
+                field.name(), fieldType.getSimpleName()
             ));
         }
     }
@@ -444,12 +444,12 @@ public record FilterQuery<T extends FilterQuery.Field>( List<Group<T>> groups ){
      * @throws IllegalArgumentException Si el campo no es de tipo String.
      */
     private static void validateString( final Field field ) {
-        final Class<?> fieldType = field.getType();
+        final Class<?> fieldType = field.type();
         if ( !String.class.isAssignableFrom( fieldType ) ) {
             throw new IllegalArgumentException( String.format(
                 "El campo '%s' de tipo '%s' no es de tipo String. " +
                 "Las operaciones LIKE solo están disponibles para campos de tipo String.",
-                field.getName(), fieldType.getSimpleName()
+                field.name(), fieldType.getSimpleName()
             ));
         }
     }
