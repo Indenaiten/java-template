@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.web.rest.shared.response;
+package com.codenaiten.template.server.web.rest.shared.dto.response;
 
 import java.util.List;
 

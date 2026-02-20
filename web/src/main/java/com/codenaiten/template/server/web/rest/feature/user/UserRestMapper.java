@@ -5,12 +5,12 @@ import com.codenaiten.template.server.core.feature.user.dto.command.UpdateUserCo
 import com.codenaiten.template.server.core.feature.user.dto.result.UserPrivateInfo;
 import com.codenaiten.template.server.core.feature.user.dto.result.UserPublicInfo;
 import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
-import com.codenaiten.template.server.web.rest.feature.user.request.CreateUserRequest;
-import com.codenaiten.template.server.web.rest.feature.user.request.UpdateUserRequest;
-import com.codenaiten.template.server.web.rest.feature.user.response.UserPrivateInfoResponse;
-import com.codenaiten.template.server.web.rest.feature.user.response.UserPublicInfoResponse;
+import com.codenaiten.template.server.web.rest.feature.user.dto.request.CreateUserRequest;
+import com.codenaiten.template.server.web.rest.feature.user.dto.request.UpdateUserRequest;
+import com.codenaiten.template.server.web.rest.feature.user.dto.response.UserPrivateInfoResponse;
+import com.codenaiten.template.server.web.rest.feature.user.dto.response.UserPublicInfoResponse;
 import com.codenaiten.template.server.web.rest.shared.mapper.RestMapper;
-import com.codenaiten.template.server.web.rest.shared.response.PageResponse;
+import com.codenaiten.template.server.web.rest.shared.dto.response.PageResponse;
 import org.mapstruct.Mapper;
 
 import java.util.Objects;

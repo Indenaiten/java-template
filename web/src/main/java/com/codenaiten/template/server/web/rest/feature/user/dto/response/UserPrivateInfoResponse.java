@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.web.rest.feature.user.response;
+package com.codenaiten.template.server.web.rest.feature.user.dto.response;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

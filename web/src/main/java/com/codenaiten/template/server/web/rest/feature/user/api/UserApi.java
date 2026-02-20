@@ -1,11 +1,12 @@
 package com.codenaiten.template.server.web.rest.feature.user.api;
 
-import com.codenaiten.template.server.web.rest.feature.user.request.CreateUserRequest;
-import com.codenaiten.template.server.web.rest.feature.user.request.UpdateUserRequest;
-import com.codenaiten.template.server.web.rest.feature.user.response.UserPrivateInfoResponse;
-import com.codenaiten.template.server.web.rest.feature.user.response.UserPublicInfoResponse;
-import com.codenaiten.template.server.web.rest.shared.response.PageResponse;
-import com.codenaiten.template.server.web.rest.shared.response.RestResponse;
+import com.codenaiten.template.server.web.rest.feature.user.dto.request.CreateUserRequest;
+import com.codenaiten.template.server.web.rest.feature.user.dto.request.UpdateUserRequest;
+import com.codenaiten.template.server.web.rest.feature.user.dto.request.UserSearchRequest;
+import com.codenaiten.template.server.web.rest.feature.user.dto.response.UserPrivateInfoResponse;
+import com.codenaiten.template.server.web.rest.feature.user.dto.response.UserPublicInfoResponse;
+import com.codenaiten.template.server.web.rest.shared.dto.response.PageResponse;
+import com.codenaiten.template.server.web.rest.shared.dto.response.RestResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,10 +27,8 @@ public interface UserApi {
     @PutMapping( "/{userId}" )
     ResponseEntity<RestResponse<UserPrivateInfoResponse>> update( @PathVariable UUID userId, @RequestBody UpdateUserRequest request );
 
-    @GetMapping({ "/search/{search}", "/search/{search}/{page}", "/search/{search}/{page}/{size}" })
+    @PostMapping( "/search" )
     ResponseEntity<RestResponse<PageResponse<UserPublicInfoResponse>>> search(
-            @PathVariable String search,
-            @RequestParam( required = false) Integer page,
-            @RequestParam( required = false ) Integer size
+            @RequestBody( required = false ) UserSearchRequest request
     );
 }

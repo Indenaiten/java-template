@@ -1,18 +1,23 @@
 package com.codenaiten.template.server.web.rest.feature.user;
 
 import com.codenaiten.template.server.core.feature.user.api.*;
+import com.codenaiten.template.server.core.feature.user.dto.UserField;
 import com.codenaiten.template.server.core.feature.user.dto.command.RegisterUserCommand;
 import com.codenaiten.template.server.core.feature.user.dto.command.UpdateUserCommand;
 import com.codenaiten.template.server.core.feature.user.dto.result.UserPrivateInfo;
 import com.codenaiten.template.server.core.feature.user.dto.result.UserPublicInfo;
+import com.codenaiten.template.server.core.shared.dto.query.FilterQuery;
+import com.codenaiten.template.server.core.shared.dto.query.PageQuery;
 import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
 import com.codenaiten.template.server.web.rest.feature.user.api.UserApi;
-import com.codenaiten.template.server.web.rest.feature.user.request.CreateUserRequest;
-import com.codenaiten.template.server.web.rest.feature.user.request.UpdateUserRequest;
-import com.codenaiten.template.server.web.rest.feature.user.response.UserPrivateInfoResponse;
-import com.codenaiten.template.server.web.rest.feature.user.response.UserPublicInfoResponse;
-import com.codenaiten.template.server.web.rest.shared.response.PageResponse;
-import com.codenaiten.template.server.web.rest.shared.response.RestResponse;
+import com.codenaiten.template.server.web.rest.feature.user.converter.UserSearchRequestConverter;
+import com.codenaiten.template.server.web.rest.feature.user.dto.request.CreateUserRequest;
+import com.codenaiten.template.server.web.rest.feature.user.dto.request.UpdateUserRequest;
+import com.codenaiten.template.server.web.rest.feature.user.dto.request.UserSearchRequest;
+import com.codenaiten.template.server.web.rest.feature.user.dto.response.UserPrivateInfoResponse;
+import com.codenaiten.template.server.web.rest.feature.user.dto.response.UserPublicInfoResponse;
+import com.codenaiten.template.server.web.rest.shared.dto.response.PageResponse;
+import com.codenaiten.template.server.web.rest.shared.dto.response.RestResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +31,7 @@ import java.util.UUID;
 public class UserController implements UserApi {
 
     private final UserRestMapper userMapper;
+    private final UserSearchRequestConverter userSearchRequestConverter;
     private final RegisterUserUseCase registerUserUseCase;
     private final GetUserPublicInfoUseCase getUserPublicInfoUseCase;
     private final GetMyInfoUseCase getMyInfoUseCase;
@@ -67,9 +73,10 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<RestResponse<PageResponse<UserPublicInfoResponse>>> search( final String search, final Integer page, final Integer size ) {
-        final PageCommand pageCommand = new PageCommand( page, size );
-        final PageInfo<UserPublicInfo> result = this.searchUserInfoUseCase.run( search, pageCommand );
+    public ResponseEntity<RestResponse<PageResponse<UserPublicInfoResponse>>> search( final UserSearchRequest request ) {
+        final FilterQuery<UserField> filterQuery = this.userSearchRequestConverter.toFilterQuery( request );
+        final PageQuery pageQuery = this.userSearchRequestConverter.toPageQuery( request );
+        final PageInfo<UserPublicInfo> result = this.searchUserInfoUseCase.run( filterQuery, pageQuery );
         final PageResponse<UserPublicInfoResponse> data = this.userMapper.toPageResponseWithMapping( result );
         final var response = RestResponse.success().build( data );
         return ResponseEntity.ok( response );
