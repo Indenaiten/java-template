@@ -23,13 +23,28 @@
         <!-- MODULES -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>rest-server-app</artifactId>
+            <artifactId>rest-server-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>rest-server-web</artifactId>
         </dependency>
 
         <!-- SPRINGBOOT -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
         <!-- POSTGRESQL -->

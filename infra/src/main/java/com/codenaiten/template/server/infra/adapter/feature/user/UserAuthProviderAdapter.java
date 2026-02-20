@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.infra.auth.adapter;
+package com.codenaiten.template.server.infra.adapter.feature.user;
 
 import com.codenaiten.template.server.core.feature.user.spi.UserAuthProviderPort;
 import lombok.RequiredArgsConstructor;

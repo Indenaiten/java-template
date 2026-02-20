@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.infra.properties.adapter;
+package com.codenaiten.template.server.infra.adapter.feature.user;
 
 import com.codenaiten.template.server.core.feature.user.spi.UserPropertiesPort;
 import lombok.RequiredArgsConstructor;

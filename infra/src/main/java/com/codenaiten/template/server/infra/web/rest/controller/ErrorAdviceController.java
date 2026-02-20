@@ -1,7 +1,7 @@
-package com.codenaiten.template.server.web.rest.shared.controller;
+package com.codenaiten.template.server.infra.web.rest.controller;
 
 import com.codenaiten.template.server.core.shared.exception.AppException;
-import com.codenaiten.template.server.web.rest.shared.dto.response.RestResponse;
+import com.codenaiten.template.server.infra.web.rest.shared.dto.response.RestResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

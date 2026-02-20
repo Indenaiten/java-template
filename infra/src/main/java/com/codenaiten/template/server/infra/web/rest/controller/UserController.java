@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.web.rest.feature.user;
+package com.codenaiten.template.server.infra.web.rest.controller;
 
 import com.codenaiten.template.server.core.feature.user.api.*;
 import com.codenaiten.template.server.core.feature.user.dto.command.RegisterUserCommand;
@@ -7,13 +7,14 @@ import com.codenaiten.template.server.core.feature.user.dto.result.UserPrivateIn
 import com.codenaiten.template.server.core.feature.user.dto.result.UserPublicInfo;
 import com.codenaiten.template.server.core.shared.dto.query.PageQuery;
 import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
-import com.codenaiten.template.server.web.rest.feature.user.api.UserApi;
-import com.codenaiten.template.server.web.rest.feature.user.dto.request.CreateUserRequest;
-import com.codenaiten.template.server.web.rest.feature.user.dto.request.UpdateUserRequest;
-import com.codenaiten.template.server.web.rest.feature.user.dto.response.UserPrivateInfoResponse;
-import com.codenaiten.template.server.web.rest.feature.user.dto.response.UserPublicInfoResponse;
-import com.codenaiten.template.server.web.rest.shared.dto.response.PageResponse;
-import com.codenaiten.template.server.web.rest.shared.dto.response.RestResponse;
+import com.codenaiten.template.server.infra.web.rest.mapper.UserRestMapper;
+import com.codenaiten.template.server.infra.web.rest.user.api.UserApi;
+import com.codenaiten.template.server.infra.web.rest.user.dto.request.CreateUserRequest;
+import com.codenaiten.template.server.infra.web.rest.user.dto.request.UpdateUserRequest;
+import com.codenaiten.template.server.infra.web.rest.user.dto.response.UserPrivateInfoResponse;
+import com.codenaiten.template.server.infra.web.rest.user.dto.response.UserPublicInfoResponse;
+import com.codenaiten.template.server.infra.web.rest.shared.dto.response.PageResponse;
+import com.codenaiten.template.server.infra.web.rest.shared.dto.response.RestResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
