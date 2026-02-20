@@ -1,18 +1,25 @@
 package com.codenaiten.template.server.core.feature.user.dto.command;
 
-import com.codenaiten.template.server.core.shared.dto.Empty;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
-public record UpdateUserCommand(
-        Empty<String> email,
-        Empty<String> username,
-        Empty<String> name,
-        Empty<String> surname,
-        Empty<LocalDate> birthdate,
-        Empty<String> password
-){
+@Slf4j
+@Setter
+@Getter
+@Accessors( fluent = true )
+@RequiredArgsConstructor
+public class UpdateUserCommand{
+    private final @NonNull String email;
+    private final @NonNull String username;
+    private final @NonNull String name;
+    private String surname;
+    private final @NonNull LocalDate birthdate;
+
+    public Optional<String> surname(){
+        return Optional.ofNullable( this.surname );
+    }
 }
