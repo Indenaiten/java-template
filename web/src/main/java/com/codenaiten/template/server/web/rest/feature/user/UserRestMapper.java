@@ -5,17 +5,17 @@ import com.codenaiten.template.server.core.feature.user.dto.command.UpdateUserCo
 import com.codenaiten.template.server.core.feature.user.dto.result.UserPrivateInfo;
 import com.codenaiten.template.server.core.feature.user.dto.result.UserPublicInfo;
 import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
-import com.codenaiten.template.server.web.rest.feature.user.api.request.CreateUserRequest;
-import com.codenaiten.template.server.web.rest.feature.user.api.request.UpdateUserRequest;
-import com.codenaiten.template.server.web.rest.feature.user.api.response.UserPrivateInfoResponse;
-import com.codenaiten.template.server.web.rest.feature.user.api.response.UserPublicInfoResponse;
-import com.codenaiten.template.server.web.rest.shared.mapper.WebRestBaseMapper;
-import com.codenaiten.template.server.web.rest.shared.api.response.PageResponse;
+import com.codenaiten.template.server.web.rest.feature.user.request.CreateUserRequest;
+import com.codenaiten.template.server.web.rest.feature.user.request.UpdateUserRequest;
+import com.codenaiten.template.server.web.rest.feature.user.response.UserPrivateInfoResponse;
+import com.codenaiten.template.server.web.rest.feature.user.response.UserPublicInfoResponse;
+import com.codenaiten.template.server.web.rest.shared.mapper.RestBaseMapper;
+import com.codenaiten.template.server.web.rest.shared.response.PageResponse;
 import org.mapstruct.Mapper;
 
 @Mapper( componentModel = "spring",
          unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE )
-public interface UserRestMapper extends WebRestBaseMapper{
+public interface UserRestMapper extends RestBaseMapper{
 
     RegisterUserCommand toCommand( CreateUserRequest src );
     UpdateUserCommand toCommand( UpdateUserRequest src );

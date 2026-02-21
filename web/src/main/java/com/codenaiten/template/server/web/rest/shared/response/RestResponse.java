@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.web.rest.shared.api.response;
+package com.codenaiten.template.server.web.rest.shared.response;
 
 import lombok.Getter;
 import lombok.NonNull;

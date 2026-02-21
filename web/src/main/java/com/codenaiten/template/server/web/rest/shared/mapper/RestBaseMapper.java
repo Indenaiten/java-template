@@ -2,13 +2,13 @@ package com.codenaiten.template.server.web.rest.shared.mapper;
 
 import com.codenaiten.template.server.core.shared.dto.query.PageQuery;
 import com.codenaiten.template.server.core.shared.dto.result.PageInfo;
-import com.codenaiten.template.server.web.rest.shared.api.request.PageRequest;
-import com.codenaiten.template.server.web.rest.shared.api.response.PageResponse;
+import com.codenaiten.template.server.web.rest.shared.request.PageRequest;
+import com.codenaiten.template.server.web.rest.shared.response.PageResponse;
 
 import java.util.Objects;
 import java.util.function.Function;
 
-public interface WebRestBaseMapper{
+public interface RestBaseMapper{
 
     PageQuery toQuery( PageRequest src );
 
