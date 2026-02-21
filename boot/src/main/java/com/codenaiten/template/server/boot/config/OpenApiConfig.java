@@ -1,6 +1,6 @@
 package com.codenaiten.template.server.boot.config;
 
-import com.codenaiten.template.server.infra.security.helper.SecurityHelper;
+import com.codenaiten.template.server.infra.security.service.SecurityService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -25,7 +25,7 @@ import java.util.Objects;
 @OpenAPIDefinition( security = @SecurityRequirement( name = "bearerAuth" ))
 public class OpenApiConfig {
 
-    private final SecurityHelper securityHelper;
+    private final SecurityService securityService;
 
 // ------------------------------------------------------------------------------------------------------------------ \\
 // ---| BEANS |------------------------------------------------------------------------------------------------------ \\
@@ -54,7 +54,7 @@ public class OpenApiConfig {
                     if( Objects.isNull( openApi.getPaths())) return;
                     openApi.getPaths().forEach(( path, item ) ->
                         item.readOperationsMap().forEach(( httpMethod, operation ) -> {
-                            if( this.securityHelper.isPublicEndpoint( httpMethod.name(), path ))
+                            if( this.securityService.isPublicEndpoint( httpMethod.name(), path ))
                                 operation.setSecurity( Collections.emptyList() );
                         })
                     );

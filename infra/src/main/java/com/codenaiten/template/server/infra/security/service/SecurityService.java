@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.infra.security.helper;
+package com.codenaiten.template.server.infra.security.service;
 
 import com.codenaiten.template.server.infra.security.properties.SecurityProperties;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.Objects;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class SecurityHelper {
+public class SecurityService{
 
     private final SecurityProperties securityProperties;
     private final PathMatcher pathMatcher;

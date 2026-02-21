@@ -26,11 +26,6 @@
             <artifactId>rest-server-core</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>rest-server-infra</artifactId>
-        </dependency>
-
         <!-- SPRINGBOOT -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

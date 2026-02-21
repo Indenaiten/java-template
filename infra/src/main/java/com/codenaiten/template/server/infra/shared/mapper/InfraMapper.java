@@ -11,7 +11,6 @@ public interface InfraMapper {
     default <T> T unwrapOptional( final Optional<T> src ){
         return src.orElse( null );
     }
-
     default <T> Optional<T> toOptional( final T src ){
         return Optional.ofNullable( src );
     }
