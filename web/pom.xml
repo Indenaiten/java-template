@@ -26,6 +26,11 @@
             <artifactId>rest-server-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>rest-server-infra</artifactId>
+        </dependency>
+
         <!-- SPRINGBOOT -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -37,6 +42,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <!-- MAPSTRUCT -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
         </dependency>
 
         <!-- SPRINGDOC OPENAPI -->

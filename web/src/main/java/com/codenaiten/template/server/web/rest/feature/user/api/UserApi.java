@@ -1,11 +1,11 @@
 package com.codenaiten.template.server.web.rest.feature.user.api;
 
-import com.codenaiten.template.server.infra.web.rest.user.dto.request.CreateUserRequest;
-import com.codenaiten.template.server.infra.web.rest.user.dto.request.UpdateUserRequest;
-import com.codenaiten.template.server.infra.web.rest.user.dto.response.UserPrivateInfoResponse;
-import com.codenaiten.template.server.infra.web.rest.user.dto.response.UserPublicInfoResponse;
-import com.codenaiten.template.server.infra.web.rest.shared.dto.response.PageResponse;
-import com.codenaiten.template.server.infra.web.rest.shared.dto.response.RestResponse;
+import com.codenaiten.template.server.web.rest.feature.user.api.request.CreateUserRequest;
+import com.codenaiten.template.server.web.rest.feature.user.api.request.UpdateUserRequest;
+import com.codenaiten.template.server.web.rest.feature.user.api.response.UserPrivateInfoResponse;
+import com.codenaiten.template.server.web.rest.feature.user.api.response.UserPublicInfoResponse;
+import com.codenaiten.template.server.web.rest.shared.api.response.PageResponse;
+import com.codenaiten.template.server.web.rest.shared.api.response.RestResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

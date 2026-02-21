@@ -15,6 +15,28 @@ logging:
     com.codenaiten.template.server: INFO
 
 # ===================================================================
+# Application Configuration
+# ===================================================================
+app:
+  locale:
+    default: ${LOCALE_DEFAULT:es}
+    cookie:
+      name: ${LOCALE_COOKIE_NAME:lang}
+
+# ===================================================================
+# Actuator Configuration
+# ===================================================================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+  endpoint:
+    health:
+      show-details: always
+
+# ===================================================================
 # Spring Configuration
 # ===================================================================
 spring:
@@ -23,8 +45,8 @@ spring:
 
   config:
     import:
-      - optional:classpath:app/application.yml
-      - optional:classpath:infra/application.yml
-      - optional:classpath:web/application.yml
+      - optional:classpath:persistence/application.yml
+      - optional:classpath:security/application.yml
+      - optional:classpath:web/rest/application.yml
 
 # ===================================================================
