@@ -9,13 +9,13 @@ import com.codenaiten.template.server.web.rest.feature.user.api.request.CreateUs
 import com.codenaiten.template.server.web.rest.feature.user.api.request.UpdateUserRequest;
 import com.codenaiten.template.server.web.rest.feature.user.api.response.UserPrivateInfoResponse;
 import com.codenaiten.template.server.web.rest.feature.user.api.response.UserPublicInfoResponse;
-import com.codenaiten.template.server.web.rest.shared.RestMapper;
+import com.codenaiten.template.server.web.rest.shared.mapper.WebRestBaseMapper;
 import com.codenaiten.template.server.web.rest.shared.api.response.PageResponse;
 import org.mapstruct.Mapper;
 
 @Mapper( componentModel = "spring",
          unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE )
-public interface UserRestMapper extends RestMapper {
+public interface UserRestMapper extends WebRestBaseMapper{
 
     RegisterUserCommand toCommand( CreateUserRequest src );
     UpdateUserCommand toCommand( UpdateUserRequest src );
@@ -23,7 +23,7 @@ public interface UserRestMapper extends RestMapper {
     UserPrivateInfoResponse toResponse(UserPrivateInfo src );
     UserPublicInfoResponse toResponse( UserPublicInfo src );
 
-    default PageResponse<UserPublicInfoResponse> toResponse(final PageInfo<UserPublicInfo> src ) {
+    default PageResponse<UserPublicInfoResponse> toResponse( final PageInfo<UserPublicInfo> src ) {
         return this.toResponse( src, this::toResponse );
     }
 }
