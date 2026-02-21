@@ -1,6 +1,6 @@
-package com.codenaiten.template.server.infra.adapter.feature.user;
+package com.codenaiten.template.server.infra.adapter.provider;
 
-import com.codenaiten.template.server.core.feature.user.spi.UserAuthProviderPort;
+import com.codenaiten.template.server.core.shared.spi.AuthProviderPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.UUID;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class UserAuthProviderAdapter implements UserAuthProviderPort {
+public class AuthProviderAdapter implements AuthProviderPort{
 
     @Override
     public Optional<UUID> getCurrentUserId() {

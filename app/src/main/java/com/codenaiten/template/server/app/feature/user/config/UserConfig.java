@@ -3,8 +3,8 @@ package com.codenaiten.template.server.app.feature.user.config;
 import com.codenaiten.template.server.core.feature.user.UserAuthService;
 import com.codenaiten.template.server.core.feature.user.UserService;
 import com.codenaiten.template.server.core.feature.user.policy.UserAccessPolicy;
-import com.codenaiten.template.server.core.feature.user.spi.UserAuthProviderPort;
-import com.codenaiten.template.server.core.feature.user.spi.UserPropertiesPort;
+import com.codenaiten.template.server.core.shared.spi.AuthProviderPort;
+import com.codenaiten.template.server.core.feature.user.spi.UserMinimumAgeProviderPort;
 import com.codenaiten.template.server.core.feature.user.spi.UserRepositoryPort;
 import com.codenaiten.template.server.core.shared.spi.PasswordEncoderPort;
 import lombok.RequiredArgsConstructor;
@@ -17,19 +17,19 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class UserConfig{
 
-    private final UserPropertiesPort userProperties;
     private final UserRepositoryPort userRepository;
-    private final UserAuthProviderPort userAuthProvider;
-    private final PasswordEncoderPort passwordCrypter;
+    private final PasswordEncoderPort passwordEncoder;
+    private final AuthProviderPort authProvider;
+    private final UserMinimumAgeProviderPort userMinimumAgeProvider;
 
     @Bean
     public UserService userService(){
-        return new UserService( this.userProperties, this.userRepository, this.passwordCrypter );
+        return new UserService( this.userMinimumAgeProvider, this.userRepository, this.passwordEncoder );
     }
 
     @Bean
     public UserAuthService userAuthService(){
-        return new UserAuthService( this.userRepository, this.userAuthProvider );
+        return new UserAuthService( this.userRepository, this.authProvider );
     }
 
     @Bean

@@ -2,12 +2,12 @@ package com.codenaiten.template.server.infra.persistence.mapper;
 
 import com.codenaiten.template.server.core.feature.user.model.User;
 import com.codenaiten.template.server.infra.persistence.entity.UserJpaEntity;
-import com.codenaiten.template.server.infra.shared.mapper.InfraMapper;
+import com.codenaiten.template.server.infra.shared.mapper.OptionalMapper;
 import org.mapstruct.Mapper;
 
 @Mapper( componentModel = "spring",
          unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE )
-public interface UserJpaMapper extends InfraMapper {
+public interface UserJpaMapper extends OptionalMapper{
 
     User toEntity( UserJpaEntity src );
     UserJpaEntity toJpa( User src );

@@ -6,7 +6,7 @@ import java.util.Optional;
 
 @Mapper( componentModel = "spring",
          unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE )
-public interface InfraMapper {
+public interface OptionalMapper{
 
     default <T> T unwrapOptional( final Optional<T> src ){
         return src.orElse( null );

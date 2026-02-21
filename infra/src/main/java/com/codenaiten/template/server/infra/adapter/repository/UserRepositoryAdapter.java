@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.infra.persistence.adapter;
+package com.codenaiten.template.server.infra.adapter.repository;
 
 import com.codenaiten.template.server.core.feature.user.model.User;
 import com.codenaiten.template.server.core.feature.user.spi.UserRepositoryPort;

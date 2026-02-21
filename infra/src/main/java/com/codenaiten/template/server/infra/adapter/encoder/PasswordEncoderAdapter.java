@@ -1,4 +1,4 @@
-package com.codenaiten.template.server.infra.adapter.shared;
+package com.codenaiten.template.server.infra.adapter.encoder;
 
 import com.codenaiten.template.server.core.shared.spi.PasswordEncoderPort;
 import lombok.RequiredArgsConstructor;

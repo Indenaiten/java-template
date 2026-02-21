@@ -1,6 +1,7 @@
-package com.codenaiten.template.server.infra.shared.properties;
+package com.codenaiten.template.server.infra.application.properties;
 
 import com.codenaiten.template.server.core.feature.user.model.User;
+import com.codenaiten.template.server.infra.shared.properties.Properties;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;

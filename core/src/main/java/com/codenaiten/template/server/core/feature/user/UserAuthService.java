@@ -3,7 +3,7 @@ package com.codenaiten.template.server.core.feature.user;
 import com.codenaiten.template.server.core.feature.user.exception.UserAuthenticationNotFoundException;
 import com.codenaiten.template.server.core.feature.user.exception.UserNotFoundException;
 import com.codenaiten.template.server.core.feature.user.model.User;
-import com.codenaiten.template.server.core.feature.user.spi.UserAuthProviderPort;
+import com.codenaiten.template.server.core.shared.spi.AuthProviderPort;
 import com.codenaiten.template.server.core.feature.user.spi.UserRepositoryPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import java.util.UUID;
 public class UserAuthService{
 
     private final UserRepositoryPort userRepository;
-    private final UserAuthProviderPort userAuthProvider;
+    private final AuthProviderPort authProvider;
 
     public Optional<User> getCurrentUser(){
         Optional<User> result = Optional.empty();
@@ -31,7 +31,7 @@ public class UserAuthService{
     }
 
     public User getCurrentUserOrThrow(){
-        final UUID currentUserId = this.userAuthProvider.getCurrentUserId()
+        final UUID currentUserId = this.authProvider.getCurrentUserId()
                 .orElseThrow( UserAuthenticationNotFoundException::new );
         return this.userRepository.findById( currentUserId )
                 .orElseThrow( () -> new UserNotFoundException( currentUserId ));

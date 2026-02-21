@@ -12,7 +12,7 @@ import com.codenaiten.template.server.core.feature.user.spec.UserEmailUniqueSpec
 import com.codenaiten.template.server.core.feature.user.spec.UserIdUniqueSpec;
 import com.codenaiten.template.server.core.feature.user.spec.UserMinimumAgeSpec;
 import com.codenaiten.template.server.core.feature.user.spec.UserUsernameUniqueSpec;
-import com.codenaiten.template.server.core.feature.user.spi.UserPropertiesPort;
+import com.codenaiten.template.server.core.feature.user.spi.UserMinimumAgeProviderPort;
 import com.codenaiten.template.server.core.feature.user.spi.UserRepositoryPort;
 import com.codenaiten.template.server.core.shared.model.vo.Email;
 import com.codenaiten.template.server.core.shared.spi.PasswordEncoderPort;
@@ -25,7 +25,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserPropertiesPort userProperties;
+    private final UserMinimumAgeProviderPort userProperties;
     private final UserRepositoryPort userRepository;
     private final PasswordEncoderPort passwordEncoder;
 
