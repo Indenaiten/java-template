@@ -12,53 +12,18 @@
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>rest-server-infra</artifactId>
-    <name>Rest Server - Infra</name>
-    <description>Infra Module Description</description>
+    <artifactId>rest-server-api</artifactId>
+    <name>Rest Server - API</name>
+    <description>API Module Description</description>
     <packaging>jar</packaging>
 
 <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <dependencies>
-        <!-- MODULES -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>rest-server-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>rest-server-api</artifactId>
-        </dependency>
-
         <!-- SPRINGBOOT -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <!-- POSTGRESQL -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- FLYWAY -->
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-database-postgresql</artifactId>
-            <scope>runtime</scope>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <!-- LOMBOK -->
@@ -68,10 +33,10 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- MAPSTRUCT -->
+        <!-- SPRINGDOC OPENAPI -->
         <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
         </dependency>
 
         <!-- ARCHJUNIT -->
